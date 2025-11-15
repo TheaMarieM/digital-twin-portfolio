@@ -1,11 +1,5 @@
 {
   "version": 3,
-  "build": {
-    "command": "pnpm build",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
   "functions": {
     "api/**/*.ts": {
       "memory": 1024,
