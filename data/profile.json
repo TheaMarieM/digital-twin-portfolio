@@ -1,0 +1,52 @@
+{
+  "owner": "Marithea Magno",
+  "role": "IT Student",
+  "summary": "IT student focused on web development, UI/UX, and building practical projects with modern JS.",
+  "star_items": [
+    {
+      "id": "proj-portfolio",
+      "title": "Personal Portfolio Modernization",
+      "situation": "Static portfolio lacked responsiveness and clear structure.",
+      "task": "Redesign and implement a responsive, accessible portfolio site.",
+      "action": "Used semantic HTML, Tailwind, and componentized sections. Implemented dark mode and mobile nav.",
+      "result": "Load time improved ~35%, mobile Lighthouse 95+, clearer information architecture.",
+      "skills": ["HTML", "CSS", "Tailwind", "Accessibility", "Performance"]
+    },
+    {
+      "id": "proj-chatbot-poc",
+      "title": "Chatbot Proof of Concept",
+      "situation": "Class project required showcasing AI integration.",
+      "task": "Prototype a simple Q&A interface using RAG principles.",
+      "action": "Structured content, computed embeddings, retrieved top context, and generated answers with citations.",
+      "result": "Delivered a working demo with >0.7 average similarity on benchmark questions.",
+      "skills": ["JavaScript", "APIs", "Embeddings", "Prompting"]
+    },
+    {
+      "id": "proj-team-planner",
+      "title": "Team Task Planner",
+      "situation": "Team struggled to track assignments and deadlines.",
+      "task": "Build a simple planner to manage tasks and priorities.",
+      "action": "Created a Kanban-style board with status and priority. Added export to CSV.",
+      "result": "Reduced missed deadlines and improved transparency across the team.",
+      "skills": ["JavaScript", "Git", "UX"]
+    },
+    {
+      "id": "proj-responsive-ui",
+      "title": "Responsive UI Exercises",
+      "situation": "Need to practice fluid layouts across devices.",
+      "task": "Convert static pages to responsive layouts.",
+      "action": "Applied CSS grid/flex, fluid typography, and tested across breakpoints.",
+      "result": "Consistent experience on phones, tablets, and desktops.",
+      "skills": ["CSS Grid", "Flexbox", "Responsive Design"]
+    },
+    {
+      "id": "proj-accessibility",
+      "title": "Accessibility Improvements",
+      "situation": "Project needed better keyboard and screen reader support.",
+      "task": "Audit and improve accessibility.",
+      "action": "Added ARIA labels, focus outlines, color contrast fixes, and skip links.",
+      "result": "WCAG AA compliance for primary flows.",
+      "skills": ["A11y", "Semantic HTML", "Testing"]
+    }
+  ]
+}

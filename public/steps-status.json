@@ -1,0 +1,16 @@
+{
+  "steps": {
+    "1_2": "planned",
+    "3": "completed",
+    "4": "completed",
+    "5": "completed",
+    "6": "completed",
+    "7": "completed",
+    "8": "in_progress",
+    "9": "in_progress",
+    "10": "planned",
+    "11": "planned",
+    "12": "planned"
+  },
+  "lastUpdated": "${NOW}"
+}

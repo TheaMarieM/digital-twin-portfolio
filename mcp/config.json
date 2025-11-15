@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "portfolio-digital-twin": {
+      "command": "python",
+      "args": [
+        "mcp/server.py"
+      ],
+      "env": {
+        "UPSTASH_VECTOR_REST_URL": "${UPSTASH_VECTOR_REST_URL}",
+        "UPSTASH_VECTOR_REST_TOKEN": "${UPSTASH_VECTOR_REST_TOKEN}",
+        "USE_LOCAL_EMBEDDINGS": "true",
+        "LOCAL_EMBEDDING_SERVICE_URL": "http://127.0.0.1:8000"
+      }
+    }
+  }
+}

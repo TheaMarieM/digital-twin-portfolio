@@ -1,0 +1,7 @@
+fastapi>=0.95.0
+uvicorn[standard]>=0.22.0
+requests>=2.31.0
+sentence-transformers>=2.2.2
+sentencepiece>=0.1.99
+openai>=1.0.0
+torch>=2.0.0; platform_system == 'Windows' or platform_system == 'Linux' or platform_system == 'Darwin'

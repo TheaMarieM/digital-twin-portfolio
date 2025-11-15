@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  /* Site-wide color tokens */
+  --bg: 255 255 255;          /* light background */
+  --card: 252 250 255;        /* soft violet card */
+  --text: 17 24 39;           /* slate-900 */
+  --muted: 100 116 139;       /* slate-500/600 */
+  --accent: 168 85 247;       /* violet-500 */
+  --ring: 168 85 247;
+  --border: 221 214 244;      /* violet-200 */
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 10 7 25;            /* deep purple */
+    --card: 26 20 55;          /* purple card */
+    --text: 236 233 252;       /* lavender */
+    --muted: 183 170 220;      /* muted purple */
+    --accent: 217 70 239;      /* fuchsia */
+    --ring: 217 70 239;
+    --border: 64 38 97;        /* purple border */
+    --shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+}
+
+/* Ensure class-based dark mode also flips tokens */
+html.dark {
+  --bg: 10 7 25;
+  --card: 26 20 55;
+  --text: 236 233 252;
+  --muted: 183 170 220;
+  --accent: 217 70 239;
+  --ring: 217 70 239;
+  --border: 64 38 97;
+  --shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable both-edges;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(168 85 247), rgb(236 72 153));
+  border-radius: 6px;
+  border: 2px solid rgb(var(--bg));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgb(147 51 234), rgb(219 39 119));
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(217 70 239), rgb(168 85 247));
+}
+
+::selection {
+  background: rgba(168, 85, 247, 0.3);
+  color: rgb(255 255 255);
+}
+
+html.dark ::selection {
+  background: rgba(217, 70, 239, 0.4);
+  color: rgb(255 255 255);
+}
+
+:where(a) {
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+}
+
+:where(button, [type="button"], [type="submit"]) {
+  outline: none;
+}
+
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid rgb(56 189 248);
+  outline-offset: 2px;
+}
+
+/* Theme toggle icon swap animation */
+.theme-toggle {
+  position: relative;
+}
+.theme-toggle .icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+/* Light mode: show moon, hide sun */
+.theme-toggle .icon.sun { opacity: 0; transform: scale(0.9); }
+.theme-toggle .icon.moon { opacity: 1; transform: scale(1); }
+/* Dark mode: show sun, hide moon */
+html.dark .theme-toggle .icon.sun { opacity: 1; transform: scale(1); }
+html.dark .theme-toggle .icon.moon { opacity: 0; transform: scale(0.9); }
+
+/* Quick rotation for Sun when entering dark mode */
+@keyframes spin-pop { from { transform: rotate(-90deg) scale(0.85); opacity: 0.5; } to { transform: rotate(0deg) scale(1); opacity: 1; } }
+html.dark .theme-toggle .icon.sun { animation: spin-pop 220ms ease-out; }
+
+/* Neon glow utilities (dark mode only) */
+html.dark .glow-border {
+  position: relative;
+  border-color: rgb(var(--accent)) !important;
+  box-shadow:
+    0 0 0 1px rgb(var(--accent) / 0.85),
+    0 0 24px rgb(var(--accent) / 0.55),
+    0 0 48px rgb(var(--accent) / 0.35),
+    var(--shadow);
+}
+
+html.dark .glow-border:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--accent) / 0.95),
+    0 0 28px rgb(var(--accent) / 0.7),
+    0 0 60px rgb(var(--accent) / 0.45),
+    var(--shadow);
+}
+
+/* Subtle aura behind the element */
+html.dark .glow-border::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(closest-side, rgb(var(--accent) / 0.28), transparent 70%);
+  filter: blur(14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+html.dark .glow-focus:focus-visible {
+  box-shadow:
+    0 0 0 3px rgb(var(--accent) / 0.9),
+    0 0 22px rgb(var(--accent) / 0.6);
+}
+
+/* Neon edge gradient on hover (dark mode) */
+html.dark .neon-edges {
+  position: relative;
+  z-index: 0; /* establish stacking so pseudo can sit behind content but above background */
+}
+html.dark .neon-edges::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* create ring thickness */
+  background: conic-gradient(from 0deg,
+    rgb(var(--accent) / 0.0) 0deg,
+    rgb(var(--accent) / 0.7) 90deg,
+    rgb(168 85 247 / 0.55) 180deg,
+    rgb(217 70 239 / 0.6) 270deg,
+    rgb(var(--accent) / 0.0) 360deg);
+  filter: blur(12px);
+  opacity: 0; /* default off */
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: -1; /* behind the card content but glow will bleed around edges */
+  pointer-events: none;
+  /* Mask the center so only a ring shows */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+html.dark .neon-edges:hover::before {
+  opacity: 0.6;
+}
+html.dark .neon-edges:focus-visible::before {
+  opacity: 0.75;
+}
