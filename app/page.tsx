@@ -415,14 +415,14 @@ export default function Home() {
                 <h3 className="text-lg font-semibold mb-4 text-purple-400">Core Technologies</h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
-                    { name: "Next.js", desc: "React framework • SSR", logo: "svg-nextjs" },
-                    { name: "Python", desc: "RAG systems • AI integration", logo: "svg-python" },
-                    { name: "TypeScript", desc: "Type-safe development", logo: "svg-typescript" },
-                    { name: "Tailwind CSS", desc: "Modern UI design", logo: "svg-tailwind" },
-                    { name: "Laravel", desc: "PHP framework • APIs", logo: "svg-laravel" },
-                    { name: "MySQL", desc: "Database design", logo: "svg-mysql" }
+                    { name: "Next.js", desc: "React framework • SSR", logo: "svg-nextjs" as const },
+                    { name: "Python", desc: "RAG systems • AI integration", logo: "svg-python" as const },
+                    { name: "TypeScript", desc: "Type-safe development", logo: "svg-typescript" as const },
+                    { name: "Tailwind CSS", desc: "Modern UI design", logo: "svg-tailwind" as const },
+                    { name: "Laravel", desc: "PHP framework • APIs", logo: "svg-laravel" as const },
+                    { name: "MySQL", desc: "Database design", logo: "svg-mysql" as const }
                   ].map((tech, i) => {
-                    const logos = {
+                    const logos: Record<string, JSX.Element> = {
                       "svg-nextjs": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 0C5.1 0 0 5.1 0 11.5S5.1 23 11.5 23 23 17.9 23 11.5 17.9 0 11.5 0zm6.5 12h-5v5h-3v-5H5V9h5V4h3v5h5v3z"/></svg>,
                       "svg-python": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.5 18c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm3-7h-2.5v-5h2.5v5zm0-6h-2.5v-1h2.5v1zm3 7h-2.5v-5h2.5v5zm0-6h-2.5v-1h2.5v1z"/></svg>,
                       "svg-typescript": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#3178c6"><path d="M0 12v12h24V0H0v12zm19.341-6.85a3.56 3.56 0 011.856 1.284c.314.453.611 1.123.611 1.416v.732h-2.004v-.413c0-.88-.329-1.348-1.788-1.348-.839 0-1.561.471-1.561 1.066 0 .477.201.848 1.305 1.129l.789.197c2.081.512 2.964 1.272 2.964 2.824 0 1.933-1.534 3.058-3.941 3.058-1.309 0-2.494-.326-3.214-1.008-.576-.521-.915-1.334-.915-2.148v-.714h2.004v.428c0 1.077.36 1.52 1.586 1.52.839 0 1.561-.428 1.561-1.041 0-.477-.201-.851-1.305-1.129l-.789-.197c-2.081-.512-2.964-1.272-2.964-2.824 0-1.933 1.534-3.058 3.941-3.058 1.309 0 2.494.326 3.214 1.008.576.521.915 1.334.915 2.148z"/></svg>,
