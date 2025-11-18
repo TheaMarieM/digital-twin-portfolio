@@ -5,16 +5,13 @@ import { usePathname } from "next/navigation";
 const sections = [
   {
     title: "Core Documentation",
-    icon: "📚",
     pages: [
       { href: "/projects", label: "Project Portfolio" },
-      { href: "/github", label: "GitHub Repositories" },
-      { href: "/demo", label: "Live Demonstrations" },
+      { href: "/designs", label: "Design Showcase" },
     ],
   },
   {
     title: "Technical Details",
-    icon: "⚡",
     pages: [
       { href: "/mcp-integration", label: "MCP Integration" },
       { href: "/advanced-features", label: "Advanced Features" },
@@ -27,7 +24,7 @@ export default function DocsNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto border-r border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm px-4 py-6">
+    <aside className="lg:sticky lg:top-0 lg:h-screen overflow-y-auto border-b lg:border-b-0 lg:border-r border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm px-6 py-8 w-full lg:w-[320px] lg:min-w-[320px]">
       <nav className="space-y-8">
         <div>
           <Link
@@ -43,8 +40,7 @@ export default function DocsNav() {
 
         {sections.map((section) => (
           <div key={section.title}>
-            <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted))]">
-              <span>{section.icon}</span>
+            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-purple-400">
               {section.title}
             </h3>
             <ul className="space-y-1">
@@ -56,8 +52,8 @@ export default function DocsNav() {
                       href={page.href}
                       className={`flex items-center rounded-lg px-3 py-2 text-sm transition-all duration-200 ${
                         isActive
-                          ? "bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-[rgb(var(--text))] font-medium border border-[rgb(var(--accent))]/30"
-                          : "text-[rgb(var(--muted))] hover:bg-[rgb(var(--card))] hover:text-[rgb(var(--text))]"
+                          ? "bg-purple-500/20 text-[rgb(var(--text))] font-medium border-2 border-purple-500/50"
+                          : "text-[rgb(var(--muted))] hover:bg-[rgb(var(--card))] hover:text-[rgb(var(--text))] border-2 border-transparent"
                       }`}
                     >
                       {page.label}
@@ -69,10 +65,9 @@ export default function DocsNav() {
           </div>
         ))}
 
-        <div className="rounded-lg border border-[rgb(var(--border))] bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-4">
-          <div className="flex items-center gap-2 text-sm font-semibold">
-            <span>💡</span>
-            <span>Documentation</span>
+        <div className="rounded-lg border-2 border-purple-500/30 bg-purple-500/5 p-4">
+          <div className="text-sm font-semibold text-purple-400">
+            Documentation
           </div>
           <p className="mt-2 text-xs text-[rgb(var(--muted))]">
             Browse projects, technical details, and live demonstrations.

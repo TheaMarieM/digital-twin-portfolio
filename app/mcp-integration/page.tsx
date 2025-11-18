@@ -140,40 +140,52 @@ export default function MCPIntegrationPage() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-purple-400">
               MCP Integration
             </h1>
             <p className="text-lg text-[rgb(var(--muted))] max-w-3xl mx-auto">
-              Model Context Protocol tools enabling intelligent portfolio interactions. 
-              7 production tools for querying profile data, practicing interviews, and semantic search.
+              Model Context Protocol server with 7 production tools for intelligent portfolio interactions.
+              Enables semantic search, interview practice, and dynamic profile queries through a FastAPI backend.
             </p>
           </div>
 
           {/* Architecture Overview */}
           <div className="mb-12 p-6 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-xl">
-            <h2 className="text-2xl font-bold mb-4">🏗️ Architecture</h2>
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">System Architecture</h2>
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="p-4 bg-[rgb(var(--bg))] border border-purple-500/30 rounded-lg">
-                <div className="text-3xl mb-2">🔧</div>
-                <h3 className="font-semibold mb-1">FastAPI Server</h3>
-                <p className="text-sm text-[rgb(var(--muted))]">Python MCP server on port 3000 with 7 tools</p>
+              <div className="p-5 bg-[rgb(var(--bg))] border-2 border-purple-500/30 rounded-lg hover:border-purple-500 transition-colors">
+                <h3 className="font-semibold mb-2 text-lg text-purple-400">FastAPI Server</h3>
+                <p className="text-sm text-[rgb(var(--muted))] mb-2">Python MCP server on port 3000</p>
+                <ul className="text-xs text-[rgb(var(--muted))] space-y-1 list-disc list-inside">
+                  <li>7 production tools</li>
+                  <li>HTTP + stdio protocols</li>
+                  <li>CORS enabled</li>
+                </ul>
               </div>
-              <div className="p-4 bg-[rgb(var(--bg))] border border-pink-500/30 rounded-lg">
-                <div className="text-3xl mb-2">⚡</div>
-                <h3 className="font-semibold mb-1">Next.js Frontend</h3>
-                <p className="text-sm text-[rgb(var(--muted))]">Portfolio on port 3001 consuming MCP tools</p>
+              <div className="p-5 bg-[rgb(var(--bg))] border-2 border-pink-500/30 rounded-lg hover:border-pink-500 transition-colors">
+                <h3 className="font-semibold mb-2 text-lg text-pink-400">Next.js Frontend</h3>
+                <p className="text-sm text-[rgb(var(--muted))] mb-2">Portfolio app on port 3001</p>
+                <ul className="text-xs text-[rgb(var(--muted))] space-y-1 list-disc list-inside">
+                  <li>Consumes MCP tools</li>
+                  <li>Real-time chat interface</li>
+                  <li>Interactive demos</li>
+                </ul>
               </div>
-              <div className="p-4 bg-[rgb(var(--bg))] border border-blue-500/30 rounded-lg">
-                <div className="text-3xl mb-2">🤖</div>
-                <h3 className="font-semibold mb-1">RAG Pipeline</h3>
-                <p className="text-sm text-[rgb(var(--muted))]">Upstash Vector + Groq LLaMA for intelligent responses</p>
+              <div className="p-5 bg-[rgb(var(--bg))] border-2 border-blue-500/30 rounded-lg hover:border-blue-500 transition-colors">
+                <h3 className="font-semibold mb-2 text-lg text-blue-400">RAG Pipeline</h3>
+                <p className="text-sm text-[rgb(var(--muted))] mb-2">Semantic search system</p>
+                <ul className="text-xs text-[rgb(var(--muted))] space-y-1 list-disc list-inside">
+                  <li>Upstash Vector DB</li>
+                  <li>Groq LLaMA 3.3</li>
+                  <li>384-dim embeddings</li>
+                </ul>
               </div>
             </div>
           </div>
 
           {/* MCP Tools */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">🔧 Available MCP Tools</h2>
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">Available MCP Tools</h2>
             
             {/* Category Filter */}
             <div className="flex gap-2 mb-6">
@@ -183,8 +195,8 @@ export default function MCPIntegrationPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     selectedCategory === cat
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                      : "bg-[rgb(var(--card))] hover:bg-[rgb(var(--card-hover))]"
+                      ? "bg-purple-500 text-white border-2 border-purple-500"
+                      : "bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] hover:border-purple-500/50"
                   }`}
                 >
                   {cat} {cat !== "All" && `(${mcpTools.filter(t => t.category === cat).length})`}
@@ -258,19 +270,19 @@ export default function MCPIntegrationPage() {
 
           {/* Integration Examples */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">🔗 Integration Examples</h2>
+            <h2 className="text-2xl font-bold mb-6 text-purple-400">Integration Examples</h2>
             <div className="space-y-4">
               {integrationExamples.map((example, i) => (
                 <div
                   key={i}
-                  className="p-5 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-xl"
+                  className="p-5 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-xl hover:border-purple-500/50 transition-colors"
                 >
                   <h3 className="text-xl font-bold mb-2">{example.title}</h3>
                   <p className="text-[rgb(var(--muted))] mb-4">{example.description}</p>
 
                   <button
                     onClick={() => setSelectedExample(selectedExample === i ? null : i)}
-                    className="mb-4 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
+                    className="mb-4 px-4 py-2 bg-purple-500 text-white border-2 border-purple-500 rounded-lg hover:bg-purple-600 hover:border-purple-600 transition-all text-sm font-medium"
                   >
                     {selectedExample === i ? "Hide" : "Show"} Details
                   </button>
@@ -278,8 +290,8 @@ export default function MCPIntegrationPage() {
                   {selectedExample === i && (
                     <div className="space-y-4 animate-in slide-in-from-top">
                       {/* Flow */}
-                      <div className="p-4 bg-[rgb(var(--bg))] border border-purple-500/30 rounded-lg">
-                        <h4 className="font-semibold mb-3">📋 Flow</h4>
+                      <div className="p-4 bg-[rgb(var(--bg))] border-2 border-purple-500/30 rounded-lg">
+                        <h4 className="font-semibold mb-3 text-purple-400">Execution Flow</h4>
                         <ol className="space-y-2">
                           {example.flow.map((step, j) => (
                             <li key={j} className="flex items-start gap-2 text-sm text-[rgb(var(--muted))]">
@@ -291,8 +303,8 @@ export default function MCPIntegrationPage() {
                       </div>
 
                       {/* Code */}
-                      <div className="p-4 bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-lg">
-                        <h4 className="font-semibold mb-3">💻 Code Example</h4>
+                      <div className="p-4 bg-[rgb(var(--bg))] border-2 border-pink-500/30 rounded-lg">
+                        <h4 className="font-semibold mb-3 text-pink-400">Code Example</h4>
                         <pre className="text-sm overflow-x-auto">
                           <code>{example.code}</code>
                         </pre>
@@ -305,16 +317,37 @@ export default function MCPIntegrationPage() {
           </div>
 
           {/* Testing Section */}
-          <div className="mt-12 p-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-2 border-purple-500/30 rounded-xl">
-            <h2 className="text-2xl font-bold mb-4">🧪 Testing MCP Tools</h2>
-            <div className="space-y-3 text-[rgb(var(--muted))]">
-              <p>To test MCP tools directly, you can use:</p>
-              <ol className="list-decimal list-inside space-y-2 ml-4">
-                <li><strong>Python script:</strong> <code className="px-2 py-1 bg-[rgb(var(--bg))] rounded text-sm">python scripts/test_mcp_direct.py</code></li>
-                <li><strong>HTTP requests:</strong> <code className="px-2 py-1 bg-[rgb(var(--bg))] rounded text-sm">curl http://localhost:3000/tools/get_portfolio_summary</code></li>
-                <li><strong>Chat interface:</strong> Ask questions at <a href="/" className="text-purple-400 hover:underline">localhost:3001</a></li>
-                <li><strong>Testing page:</strong> Visit <a href="/testing" className="text-purple-400 hover:underline">/testing</a> for interactive tool runner</li>
-              </ol>
+          <div className="mt-12 p-6 bg-[rgb(var(--card))] border-2 border-purple-500/30 rounded-xl">
+            <h2 className="text-2xl font-bold mb-4 text-purple-400">Testing & Development</h2>
+            <div className="space-y-4">
+              <p className="text-[rgb(var(--muted))]">Multiple ways to test and interact with MCP tools:</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="p-4 bg-[rgb(var(--bg))] border-2 border-[rgb(var(--border))] rounded-lg">
+                  <h3 className="font-semibold mb-2 text-purple-400">Command Line</h3>
+                  <code className="text-xs bg-[rgb(var(--card))] px-2 py-1 rounded block mb-2">python scripts/test_mcp_direct.py</code>
+                  <p className="text-xs text-[rgb(var(--muted))]">Direct Python testing of all tools</p>
+                </div>
+                <div className="p-4 bg-[rgb(var(--bg))] border-2 border-[rgb(var(--border))] rounded-lg">
+                  <h3 className="font-semibold mb-2 text-pink-400">HTTP API</h3>
+                  <code className="text-xs bg-[rgb(var(--card))] px-2 py-1 rounded block mb-2">curl localhost:3000/tools/*</code>
+                  <p className="text-xs text-[rgb(var(--muted))]">REST API endpoints for each tool</p>
+                </div>
+                <div className="p-4 bg-[rgb(var(--bg))] border-2 border-[rgb(var(--border))] rounded-lg">
+                  <h3 className="font-semibold mb-2 text-blue-400">Chat Interface</h3>
+                  <a href="/" className="text-xs text-blue-400 hover:underline block mb-2">localhost:3001 →</a>
+                  <p className="text-xs text-[rgb(var(--muted))]">Natural language queries with RAG</p>
+                </div>
+                <div className="p-4 bg-[rgb(var(--bg))] border-2 border-[rgb(var(--border))] rounded-lg">
+                  <h3 className="font-semibold mb-2 text-emerald-400">Interactive Testing</h3>
+                  <a href="/testing" className="text-xs text-emerald-400 hover:underline block mb-2">/testing →</a>
+                  <p className="text-xs text-[rgb(var(--muted))]">Web UI for manual tool execution</p>
+                </div>
+                <div className="p-4 bg-[rgb(var(--bg))] border-2 border-[rgb(var(--border))] rounded-lg">
+                  <h3 className="font-semibold mb-2 text-violet-400">Claude Desktop</h3>
+                  <code className="text-xs bg-[rgb(var(--card))] px-2 py-1 rounded block mb-2">MCP stdio protocol</code>
+                  <p className="text-xs text-[rgb(var(--muted))]">Native integration with Claude Desktop app</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

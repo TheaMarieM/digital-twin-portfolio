@@ -1,215 +1,601 @@
 "use client";
+import { useState, useEffect } from "react";
 import DocsLayout from "../components/DocsLayout";
-import { useState } from "react";
 
-const repositories = [
+interface Repository {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  category: string;
+  week: number;
+  stars: number;
+  forks: number;
+  language: string;
+  technologies: string[];
+  status: "active" | "archived" | "demo";
+  links: {
+    github: string;
+    demo?: string;
+    docs?: string;
+  };
+  metrics: {
+    commits: number;
+    contributors: number;
+    size: string;
+    lastUpdated: string;
+  };
+  highlights: string[];
+}
+
+const repositories: Repository[] = [
   {
-    name: "my-ai-app",
-    fullName: "Digital Twin MCP Server",
-    description: "RAG-powered portfolio assistant with FastAPI + Next.js integration",
-    url: "https://github.com/TheaMarieM/my-ai-app",
-    status: "Active",
+    id: "digital-twin-portfolio",
+    name: "digital-twin-portfolio",
+    title: "Digital Twin Portfolio with MCP Server",
+    description: "AI-powered portfolio with Model Context Protocol server for intelligent assistant integration. Features RAG search, Claude Desktop integration, and comprehensive project showcase.",
+    category: "AI/ML",
+    week: 8,
     stars: 0,
+    forks: 0,
     language: "TypeScript",
-    topics: ["mcp", "rag", "nextjs", "fastapi", "groq", "upstash"],
-    features: ["7 MCP Tools", "Upstash Vector", "Groq LLaMA 3.3", "Interview Training"]
+    technologies: ["Next.js 16", "Python", "FastAPI", "MCP Protocol", "Upstash Vector", "Groq API", "Tailwind CSS"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/digital-twin-portfolio",
+      demo: "https://digital-twin-portfolio.vercel.app",
+      docs: "/mcp-integration"
+    },
+    metrics: {
+      commits: 50,
+      contributors: 1,
+      size: "2.8 MB",
+      lastUpdated: "2024-11-15"
+    },
+    highlights: [
+      "7 production MCP tools for portfolio queries",
+      "Claude Desktop integration via stdio protocol",
+      "RAG search with 20 embedded chunks",
+      "Real-time chat with Groq LLaMA 3.3-70b",
+      "Comprehensive 8-week project showcase"
+    ]
   },
   {
-    name: "portfolio",
-    fullName: "Personal Portfolio Website",
-    description: "Modern portfolio with Tailwind CSS, dark mode, and accessibility features",
-    url: "https://github.com/TheaMarieM/portfolio",
-    status: "Complete",
+    id: "person-search-app",
+    name: "person-search-app",
+    title: "Person Search Application",
+    description: "Full-stack search application with advanced filtering, real-time updates, and responsive design. Built with React and Node.js.",
+    category: "Full-Stack",
+    week: 7,
     stars: 0,
+    forks: 0,
+    language: "JavaScript",
+    technologies: ["React", "Node.js", "PostgreSQL", "Express", "JWT", "Tailwind CSS"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/person-search",
+      demo: "https://person-search.vercel.app"
+    },
+    metrics: {
+      commits: 35,
+      contributors: 1,
+      size: "1.2 MB",
+      lastUpdated: "2024-11-08"
+    },
+    highlights: [
+      "Fuzzy search with <500ms response time",
+      "JWT authentication and authorization",
+      "PostgreSQL with 1000+ records",
+      "Mobile-first responsive design",
+      "Advanced filtering and sorting"
+    ]
+  },
+  {
+    id: "ecommerce-platform",
+    name: "ecommerce-platform",
+    title: "E-Commerce Platform",
+    description: "Complete e-commerce solution with product management, shopping cart, payment processing, and admin dashboard.",
+    category: "E-Commerce",
+    week: 6,
+    stars: 0,
+    forks: 0,
+    language: "TypeScript",
+    technologies: ["Next.js", "Stripe API", "PostgreSQL", "Redux", "Tailwind CSS"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/ecommerce-platform",
+      demo: "https://ecommerce-demo.vercel.app"
+    },
+    metrics: {
+      commits: 42,
+      contributors: 3,
+      size: "3.1 MB",
+      lastUpdated: "2024-11-01"
+    },
+    highlights: [
+      "Stripe payment integration",
+      "Product inventory management",
+      "Order tracking and fulfillment",
+      "Admin dashboard with analytics",
+      "SEO optimized product pages"
+    ]
+  },
+  {
+    id: "advanced-task-manager",
+    name: "advanced-task-manager",
+    title: "Advanced Task Management System",
+    description: "Enhanced task planner with real-time collaboration, file attachments, and team analytics dashboard.",
+    category: "Productivity",
+    week: 5,
+    stars: 0,
+    forks: 0,
+    language: "JavaScript",
+    technologies: ["React", "Socket.io", "AWS S3", "Node.js", "Chart.js"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/advanced-task-manager",
+      demo: "https://task-manager-pro.vercel.app"
+    },
+    metrics: {
+      commits: 28,
+      contributors: 2,
+      size: "1.8 MB",
+      lastUpdated: "2024-10-25"
+    },
+    highlights: [
+      "Real-time collaboration with Socket.io",
+      "File attachments via AWS S3",
+      "Team analytics dashboard",
+      "Role-based permissions",
+      "Productivity metrics tracking"
+    ]
+  },
+  {
+    id: "weather-dashboard",
+    name: "weather-dashboard",
+    title: "Weather Analytics Dashboard",
+    description: "Comprehensive weather application with data visualization, forecasting, and location-based services.",
+    category: "Data Analytics",
+    week: 4,
+    stars: 0,
+    forks: 0,
+    language: "JavaScript",
+    technologies: ["React", "Chart.js", "OpenWeather API", "PWA", "Service Workers"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/weather-dashboard",
+      demo: "https://weather-analytics.vercel.app"
+    },
+    metrics: {
+      commits: 22,
+      contributors: 1,
+      size: "950 KB",
+      lastUpdated: "2024-10-18"
+    },
+    highlights: [
+      "Interactive weather charts",
+      "5-day forecast with hourly data",
+      "PWA with offline capabilities",
+      "Geolocation integration",
+      "Data caching for performance"
+    ]
+  },
+  {
+    id: "headless-blog-cms",
+    name: "headless-blog-cms",
+    title: "Headless Blog CMS",
+    description: "Modern headless content management system with rich text editor, media management, and multi-frontend support.",
+    category: "CMS",
+    week: 3,
+    stars: 0,
+    forks: 0,
+    language: "JavaScript",
+    technologies: ["Strapi", "React", "MDX", "GraphQL", "Cloudinary"],
+    status: "active",
+    links: {
+      github: "https://github.com/TheaMarieM/headless-blog-cms",
+      demo: "https://blog-cms.vercel.app"
+    },
+    metrics: {
+      commits: 18,
+      contributors: 1,
+      size: "1.5 MB",
+      lastUpdated: "2024-10-11"
+    },
+    highlights: [
+      "Rich text editor with MDX support",
+      "Media management with Cloudinary",
+      "GraphQL API for flexible queries",
+      "Multi-frontend compatibility",
+      "SEO optimized content delivery"
+    ]
+  },
+  {
+    id: "portfolio-v1",
+    name: "portfolio-v1",
+    title: "Personal Portfolio (Version 1)",
+    description: "First iteration of personal portfolio with responsive design, dark mode, and accessibility features.",
+    category: "Portfolio",
+    week: 2,
+    stars: 0,
+    forks: 0,
     language: "HTML",
-    topics: ["portfolio", "tailwind", "responsive", "accessibility"],
-    features: ["95+ Lighthouse", "WCAG AA", "Dark Mode", "Mobile First"]
+    technologies: ["HTML5", "CSS3", "Tailwind CSS", "JavaScript", "Vite"],
+    status: "archived",
+    links: {
+      github: "https://github.com/TheaMarieM/portfolio-v1",
+      demo: "https://portfolio-v1.vercel.app"
+    },
+    metrics: {
+      commits: 15,
+      contributors: 1,
+      size: "420 KB",
+      lastUpdated: "2024-10-04"
+    },
+    highlights: [
+      "WCAG AA accessibility compliance",
+      "35% load time improvement",
+      "Dark mode implementation",
+      "Mobile-first responsive design",
+      "Performance optimizations"
+    ]
   },
   {
-    name: "rag-chatbot",
-    fullName: "RAG Chatbot POC",
-    description: "Retrieval-augmented generation chatbot with embeddings and semantic search",
-    url: "https://github.com/TheaMarieM/rag-chatbot",
-    status: "Complete",
+    id: "interactive-todo",
+    name: "interactive-todo",
+    title: "Interactive Todo Application",
+    description: "Feature-rich todo application with drag-and-drop, local storage, and modern UI built with vanilla JavaScript.",
+    category: "Foundation",
+    week: 1,
     stars: 0,
+    forks: 0,
     language: "JavaScript",
-    topics: ["rag", "openai", "embeddings", "chatbot"],
-    features: ["Semantic Search", "Citation Support", ">0.7 Similarity", "Q&A Interface"]
-  },
-  {
-    name: "team-planner",
-    fullName: "Team Task Planner",
-    description: "Kanban-style task management system for team collaboration and deadlines",
-    url: "https://github.com/TheaMarieM/team-planner",
-    status: "Complete",
-    stars: 0,
-    language: "JavaScript",
-    topics: ["kanban", "react", "task-management", "productivity"],
-    features: ["Drag & Drop", "Priority Levels", "CSV Export", "Local Storage"]
-  },
-  {
-    name: "responsive-ui",
-    fullName: "Responsive UI Components",
-    description: "Collection of responsive UI components with modern CSS Grid and Flexbox",
-    url: "https://github.com/TheaMarieM/responsive-ui",
-    status: "Complete",
-    stars: 0,
-    language: "CSS",
-    topics: ["css-grid", "flexbox", "responsive", "components"],
-    features: ["25+ Components", "Container Queries", "Fluid Typography", "Storybook"]
+    technologies: ["Vanilla JS", "CSS Grid", "Local Storage", "HTML5 Drag & Drop"],
+    status: "demo",
+    links: {
+      github: "https://github.com/TheaMarieM/interactive-todo",
+      demo: "https://interactive-todo.vercel.app"
+    },
+    metrics: {
+      commits: 12,
+      contributors: 1,
+      size: "180 KB",
+      lastUpdated: "2024-09-27"
+    },
+    highlights: [
+      "Drag-and-drop functionality",
+      "Local storage persistence",
+      "Vanilla JavaScript architecture",
+      "CSS Grid responsive layout",
+      "100% feature completion"
+    ]
   }
 ];
 
+const categories = ["All", "AI/ML", "Full-Stack", "E-Commerce", "Productivity", "Data Analytics", "CMS", "Portfolio", "Foundation"];
+const statuses = ["All", "active", "archived", "demo"];
+const languages = ["All", "TypeScript", "JavaScript", "Python", "HTML"];
+
 export default function GitHubPage() {
-  const [copied, setCopied] = useState<string | null>(null);
-  
-  const copyURL = (url: string) => {
-    navigator.clipboard.writeText(url);
-    setCopied(url);
-    setTimeout(() => setCopied(null), 2000);
+  const [filteredRepos, setFilteredRepos] = useState(repositories);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedLanguage, setSelectedLanguage] = useState("All");
+  const [sortBy, setSortBy] = useState<"week" | "commits" | "updated">("week");
+
+  useEffect(() => {
+    let filtered = repositories.filter(repo => {
+      const categoryMatch = selectedCategory === "All" || repo.category === selectedCategory;
+      const statusMatch = selectedStatus === "All" || repo.status === selectedStatus;
+      const languageMatch = selectedLanguage === "All" || repo.language === selectedLanguage;
+      return categoryMatch && statusMatch && languageMatch;
+    });
+
+    // Sort repositories
+    filtered = filtered.sort((a, b) => {
+      switch (sortBy) {
+        case "week":
+          return b.week - a.week;
+        case "commits":
+          return b.metrics.commits - a.metrics.commits;
+        case "updated":
+          return new Date(b.metrics.lastUpdated).getTime() - new Date(a.metrics.lastUpdated).getTime();
+        default:
+          return 0;
+      }
+    });
+
+    setFilteredRepos(filtered);
+  }, [selectedCategory, selectedStatus, selectedLanguage, sortBy]);
+
+  const totalStats = {
+    repositories: repositories.length,
+    commits: repositories.reduce((sum, repo) => sum + repo.metrics.commits, 0),
+    technologies: new Set(repositories.flatMap(repo => repo.technologies)).size,
+    weeks: 8
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "active": return "bg-emerald-500/20 text-emerald-400";
+      case "archived": return "bg-amber-500/20 text-amber-400";
+      case "demo": return "bg-blue-500/20 text-blue-400";
+      default: return "bg-gray-500/20 text-gray-400";
+    }
+  };
+
+  const getLanguageColor = (language: string) => {
+    switch (language) {
+      case "TypeScript": return "text-blue-400";
+      case "JavaScript": return "text-yellow-400";
+      case "Python": return "text-green-400";
+      case "HTML": return "text-orange-400";
+      default: return "text-gray-400";
+    }
   };
 
   return (
     <DocsLayout>
-      <main className="mx-auto w-full max-w-[1400px] px-6 lg:px-8 py-12">
-        <section className="mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[rgb(var(--border))] bg-gradient-to-r from-purple-500/20 to-pink-500/20 px-4 py-1.5 text-sm mb-6">
-            <span className="text-2xl">🔗</span>
-            <span className="font-medium">GitHub Repositories</span>
+      <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+              GitHub Portfolio
+            </h1>
+            <p className="text-lg text-[rgb(var(--muted))] max-w-3xl mx-auto">
+              Complete collection of repositories showcasing 8 weeks of progressive development, 
+              from foundation concepts to advanced AI integration.
+            </p>
           </div>
-          <h1 className="text-4xl font-bold md:text-5xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Complete Implementation</h1>
-          <p className="mt-4 text-lg text-[rgb(var(--muted))] max-w-3xl">
-            Production-ready code with advanced features, comprehensive testing, and deployment guides.
-          </p>
-          <div className="mt-6 h-1.5 w-32 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500" />
-        </section>
 
-        {/* Repository Cards */}
-        <div className="grid gap-6 mb-12">
-          {repositories.map((repo) => (
-            <article key={repo.name} className="group rounded-xl border-2 border-[rgb(var(--border))] bg-gradient-to-br from-[rgb(var(--card))] to-transparent p-6 shadow-lg hover:shadow-2xl hover:border-[rgb(var(--accent))] transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h2 className="text-2xl font-bold">{repo.fullName}</h2>
-                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                      repo.status === "Active" 
-                        ? "bg-emerald-500/20 text-emerald-400" 
-                        : "bg-blue-500/20 text-blue-400"
-                    }`}>
-                      {repo.status}
-                    </span>
-                  </div>
-                  <code className="text-sm text-purple-400 font-mono">{repo.name}</code>
-                  <p className="text-[rgb(var(--muted))] mt-3">{repo.description}</p>
-                </div>
+          {/* Stats Overview */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-2 border-purple-500/30 rounded-xl">
+            <h2 className="text-xl font-bold mb-4 text-center">📊 Portfolio Statistics</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center p-4 bg-[rgb(var(--card))] border border-[rgb(var(--border))] rounded-lg">
+                <div className="text-3xl font-bold text-purple-400">{totalStats.repositories}</div>
+                <div className="text-sm text-[rgb(var(--muted))]">Repositories</div>
               </div>
-
-              {/* Language & Stats */}
-              <div className="flex items-center gap-4 mb-4 text-sm">
-                <span className="flex items-center gap-1.5">
-                  <span className={`w-3 h-3 rounded-full ${
-                    repo.language === "TypeScript" ? "bg-blue-500" :
-                    repo.language === "JavaScript" ? "bg-yellow-500" :
-                    repo.language === "HTML" ? "bg-orange-500" :
-                    "bg-purple-500"
-                  }`}></span>
-                  {repo.language}
-                </span>
-                <span className="flex items-center gap-1 text-[rgb(var(--muted))]">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  {repo.stars}
-                </span>
+              <div className="text-center p-4 bg-[rgb(var(--card))] border border-[rgb(var(--border))] rounded-lg">
+                <div className="text-3xl font-bold text-pink-400">{totalStats.commits}</div>
+                <div className="text-sm text-[rgb(var(--muted))]">Total Commits</div>
               </div>
-
-              {/* Topics */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {repo.topics.map(topic => (
-                  <span key={topic} className="px-2 py-1 bg-purple-500/10 border border-purple-500/30 rounded text-xs font-medium text-purple-300">
-                    {topic}
-                  </span>
-                ))}
+              <div className="text-center p-4 bg-[rgb(var(--card))] border border-[rgb(var(--border))] rounded-lg">
+                <div className="text-3xl font-bold text-blue-400">{totalStats.technologies}</div>
+                <div className="text-sm text-[rgb(var(--muted))]">Technologies</div>
               </div>
-
-              {/* Features */}
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {repo.features.map((feature, i) => (
-                  <div key={i} className="flex items-center gap-1.5 text-sm text-[rgb(var(--muted))]">
-                    <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {feature}
-                  </div>
-                ))}
+              <div className="text-center p-4 bg-[rgb(var(--card))] border border-[rgb(var(--border))] rounded-lg">
+                <div className="text-3xl font-bold text-emerald-400">{totalStats.weeks}</div>
+                <div className="text-sm text-[rgb(var(--muted))]">Weeks</div>
               </div>
+            </div>
+          </div>
 
-              {/* Actions */}
-              <div className="flex gap-3">
-                <a
-                  href={repo.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg hover:scale-105 transition-transform duration-200"
-                >
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                  </svg>
-                  View on GitHub
-                </a>
+          {/* Filters */}
+          <div className="mb-8 space-y-4">
+            {/* Category Filter */}
+            <div className="flex flex-wrap gap-2">
+              <span className="text-sm text-[rgb(var(--muted))] self-center">Category:</span>
+              {categories.map(cat => (
                 <button
-                  onClick={() => copyURL(repo.url)}
-                  className="px-4 py-2.5 rounded-lg border-2 border-[rgb(var(--border))] bg-[rgb(var(--card))] hover:border-purple-500/50 transition-all text-sm font-medium"
-                  title="Copy URL"
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+                    selectedCategory === cat
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                      : "bg-[rgb(var(--card))] hover:bg-[rgb(var(--card-hover))]"
+                  }`}
                 >
-                  {copied === repo.url ? "✓" : "📋"}
+                  {cat}
                 </button>
-              </div>
-            </article>
-          ))}
-        </div>
+              ))}
+            </div>
 
-        <div className="rounded-2xl border-2 border-[rgb(var(--border))] bg-gradient-to-br from-purple-500/10 to-pink-500/10 p-8 mb-12">
-          <h2 className="text-2xl font-bold mb-6">Implementation Checklist</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {[
-              { title: "✅ Core RAG System", items: ["Groq + LLaMA 3.3 integration", "Upstash Vector with 16 chunks", "STAR-format profile data", "Conversation history (Redis)"] },
-              { title: "✅ Advanced Features", items: ["Query enhancement & optimization", "Semantic caching", "Response refinement", "Multi-platform testing"] },
-              { title: "✅ Production Ready", items: ["Live monitoring dashboard", "Load testing framework", "Operations runbook", "Deployment guides"] },
-              { title: "✅ Documentation", items: ["Interactive UI pages", "Code examples", "Performance benchmarks", "Architecture diagrams"] },
-            ].map((section) => (
-              <div key={section.title} className="rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-4">
-                <h3 className="font-semibold text-lg mb-3">{section.title}</h3>
-                <ul className="space-y-2 text-sm text-[rgb(var(--muted))]">
-                  {section.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-emerald-400 mt-0.5">▸</span>
-                      {item}
-                    </li>
+            {/* Status and Language Filters */}
+            <div className="flex flex-wrap gap-4">
+              <div className="flex gap-2">
+                <span className="text-sm text-[rgb(var(--muted))] self-center">Status:</span>
+                {statuses.map(status => (
+                  <button
+                    key={status}
+                    onClick={() => setSelectedStatus(status)}
+                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+                      selectedStatus === status
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                        : "bg-[rgb(var(--card))] hover:bg-[rgb(var(--card-hover))]"
+                    }`}
+                  >
+                    {status}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-2">
+                <span className="text-sm text-[rgb(var(--muted))] self-center">Language:</span>
+                {languages.map(lang => (
+                  <button
+                    key={lang}
+                    onClick={() => setSelectedLanguage(lang)}
+                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+                      selectedLanguage === lang
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                        : "bg-[rgb(var(--card))] hover:bg-[rgb(var(--card-hover))]"
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-2">
+                <span className="text-sm text-[rgb(var(--muted))] self-center">Sort by:</span>
+                {[
+                  { value: "week", label: "Week" },
+                  { value: "commits", label: "Commits" },
+                  { value: "updated", label: "Updated" }
+                ].map(option => (
+                  <button
+                    key={option.value}
+                    onClick={() => setSortBy(option.value as any)}
+                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+                      sortBy === option.value
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                        : "bg-[rgb(var(--card))] hover:bg-[rgb(var(--card-hover))]"
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Results count */}
+          <p className="text-center text-sm text-[rgb(var(--muted))] mb-8">
+            Showing {filteredRepos.length} of {repositories.length} repositories
+          </p>
+
+          {/* Repository Cards */}
+          <div className="space-y-6">
+            {filteredRepos.map(repo => (
+              <div
+                key={repo.id}
+                className="p-6 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-xl hover:border-purple-500/50 transition-all"
+              >
+                {/* Header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h2 className="text-2xl font-bold font-mono">{repo.name}</h2>
+                      <span className="px-2 py-1 bg-purple-500/20 text-purple-300 rounded text-xs font-medium">
+                        Week {repo.week}
+                      </span>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(repo.status)}`}>
+                        {repo.status}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-[rgb(var(--muted))] mb-2">{repo.title}</h3>
+                    <p className="text-[rgb(var(--muted))]">{repo.description}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className={`text-lg font-bold ${getLanguageColor(repo.language)}`}>
+                      {repo.language}
+                    </div>
+                    <div className="text-xs text-[rgb(var(--muted))]">{repo.category}</div>
+                  </div>
+                </div>
+
+                {/* Metrics */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                  <div className="bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold text-purple-400">{repo.metrics.commits}</div>
+                    <div className="text-xs text-[rgb(var(--muted))]">Commits</div>
+                  </div>
+                  <div className="bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold text-pink-400">{repo.metrics.contributors}</div>
+                    <div className="text-xs text-[rgb(var(--muted))]">Contributors</div>
+                  </div>
+                  <div className="bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold text-blue-400">{repo.metrics.size}</div>
+                    <div className="text-xs text-[rgb(var(--muted))]">Size</div>
+                  </div>
+                  <div className="bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded-lg p-3 text-center">
+                    <div className="text-lg font-bold text-emerald-400">{repo.metrics.lastUpdated}</div>
+                    <div className="text-xs text-[rgb(var(--muted))]">Updated</div>
+                  </div>
+                </div>
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {repo.technologies.map(tech => (
+                    <span key={tech} className="px-2 py-1 bg-[rgb(var(--bg))] border border-[rgb(var(--border))] rounded text-xs">
+                      {tech}
+                    </span>
                   ))}
-                </ul>
+                </div>
+
+                {/* Highlights */}
+                <div className="mb-4">
+                  <h4 className="font-semibold mb-2 text-sm">✨ Key Highlights:</h4>
+                  <ul className="grid md:grid-cols-2 gap-1">
+                    {repo.highlights.map((highlight, i) => (
+                      <li key={i} className="text-sm text-[rgb(var(--muted))] flex items-start gap-2">
+                        <span className="text-emerald-400 mt-0.5">▸</span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Links */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={repo.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg hover:opacity-90 transition-opacity"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                  </a>
+                  {repo.links.demo && (
+                    <a
+                      href={repo.links.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-lg hover:border-purple-500/50 transition-all"
+                    >
+                      🚀 Live Demo
+                    </a>
+                  )}
+                  {repo.links.docs && (
+                    <a
+                      href={repo.links.docs}
+                      className="flex items-center gap-2 px-4 py-2 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-lg hover:border-purple-500/50 transition-all"
+                    >
+                      📚 Documentation
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
-        </div>
 
-        <div className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-6">
-          <h2 className="text-xl font-bold mb-4">Quick Start</h2>
-          <p className="text-sm text-[rgb(var(--muted))] mb-4">Clone the main repository to get started with the Digital Twin MCP Server:</p>
-          <div className="flex items-center gap-3 rounded-lg border border-[rgb(var(--border))] bg-[rgb(var(--bg))] p-4 font-mono text-sm">
-            <code className="flex-1">git clone https://github.com/TheaMarieM/my-ai-app.git</code>
-            <button
-              onClick={() => copyURL("https://github.com/TheaMarieM/my-ai-app.git")}
-              className="rounded-md bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-1.5 text-xs font-semibold text-white hover:scale-105 transition-transform"
-            >
-              {copied === "https://github.com/TheaMarieM/my-ai-app.git" ? "✓ Copied!" : "Copy"}
-            </button>
-          </div>
-          <div className="mt-4 flex gap-3">
-            <a href="/about" className="text-sm text-purple-400 hover:underline">📚 View Documentation</a>
-            <a href="/testing" className="text-sm text-purple-400 hover:underline">🧪 Test the API</a>
-            <a href="/projects" className="text-sm text-purple-400 hover:underline">💡 See All Projects</a>
+          {/* Empty State */}
+          {filteredRepos.length === 0 && (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-xl font-semibold mb-2">No repositories found</h3>
+              <p className="text-[rgb(var(--muted))]">
+                Try adjusting your filters to see more results.
+              </p>
+            </div>
+          )}
+
+          {/* GitHub Profile Link */}
+          <div className="mt-12 p-6 bg-[rgb(var(--card))] border-2 border-[rgb(var(--border))] rounded-xl text-center">
+            <h2 className="text-2xl font-bold mb-4">🔗 Connect with Me</h2>
+            <div className="space-y-4">
+              <div>
+                <a
+                  href="https://github.com/TheaMarieM"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg hover:opacity-90 transition-opacity text-lg font-semibold"
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  Visit GitHub Profile
+                </a>
+              </div>
+              <p className="text-[rgb(var(--muted))] text-sm">
+                Follow for updates on new projects and contributions to open source
+              </p>
+            </div>
           </div>
         </div>
       </main>

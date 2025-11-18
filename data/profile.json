@@ -1,52 +1,212 @@
 {
   "owner": "Marithea Magno",
-  "role": "IT Student",
-  "summary": "IT student focused on web development, UI/UX, and building practical projects with modern JS.",
+  "role": "Full-Stack Developer & AI Engineer",
+  "summary": "Passionate developer specializing in modern web technologies, AI/ML integration, and user-centered design. Experienced in building scalable applications with React/Next.js, Python, and cloud services.",
   "star_items": [
     {
-      "id": "proj-portfolio",
-      "title": "Personal Portfolio Modernization",
-      "situation": "Static portfolio lacked responsiveness and clear structure.",
-      "task": "Redesign and implement a responsive, accessible portfolio site.",
-      "action": "Used semantic HTML, Tailwind, and componentized sections. Implemented dark mode and mobile nav.",
-      "result": "Load time improved ~35%, mobile Lighthouse 95+, clearer information architecture.",
-      "skills": ["HTML", "CSS", "Tailwind", "Accessibility", "Performance"]
+      "id": "proj-rag-chatbot",
+      "title": "RAG-Powered AI Chatbot with Portfolio Intelligence",
+      "situation": "Need for intelligent conversational AI system that can answer questions about professional background using real-time knowledge retrieval from vector database.",
+      "task": "Build production-ready RAG (Retrieval-Augmented Generation) chatbot using Groq LLM, Upstash Vector database for semantic search, and Upstash Redis for session management.",
+      "action": "Developed complete RAG pipeline with sentence-transformers embeddings (384-dim), integrated Groq API with LLaMA 3.3-70b model for intelligent responses, implemented semantic search across portfolio data, and created real-time streaming chat interface with context-aware responses.",
+      "result": "Deployed intelligent AI assistant capable of answering portfolio-specific questions with contextual accuracy, featuring <2s response times, persistent chat history, and seamless integration with professional portfolio website.",
+      "skills": ["RAG", "Groq API", "LLaMA 3.3", "Upstash Vector", "Upstash Redis", "Semantic Search", "Next.js", "TypeScript", "Vector Embeddings", "AI/ML"],
+      "week": 10,
+      "category": "AI Systems",
+      "metrics": {
+        "LLM Model": "LLaMA 3.3-70b",
+        "Vector DB": "Upstash",
+        "Embeddings": "384-dim",
+        "Response Time": "<2s"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/digital-twin-portfolio",
+        "demo": "https://digital-twin-portfolio-eight.vercel.app"
+      }
     },
     {
-      "id": "proj-chatbot-poc",
-      "title": "Chatbot Proof of Concept",
-      "situation": "Class project required showcasing AI integration.",
-      "task": "Prototype a simple Q&A interface using RAG principles.",
-      "action": "Structured content, computed embeddings, retrieved top context, and generated answers with citations.",
-      "result": "Delivered a working demo with >0.7 average similarity on benchmark questions.",
-      "skills": ["JavaScript", "APIs", "Embeddings", "Prompting"]
+      "id": "proj-digital-twin-portfolio",
+      "title": "Integrated Professional Portfolio (Weeks 6-9)",
+      "situation": "Transform individual projects into a cohesive professional masterpiece by extending digital CV and integrating sophisticated MCP tool calling functionality throughout comprehensive portfolio application.",
+      "task": "Create unified professional showcase demonstrating full breadth of AI agent development expertise while maintaining architectural coherence and advanced user experience design.",
+      "action": "Implemented advanced MCP integration patterns allowing seamless tool calling between portfolio components, digital twin system, Person App, and roll-dice MCP server. Created comprehensive technical documentation and professional branding strategy.",
+      "result": "Deployed comprehensive professional portfolio with seamless MCP functionality integration, compelling technical case studies, and professional branding ready for industry presentation.",
+      "skills": ["Next.js", "MCP Protocol", "RAG", "Claude Desktop", "TypeScript", "Portfolio Architecture", "Professional Branding", "Technical Documentation"],
+      "week": 9,
+      "category": "Portfolio",
+      "metrics": {
+        "MCP Tools": "7",
+        "Integrated Projects": "4",
+        "Response Time": "<2s",
+        "Lighthouse": "95+"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/digital-twin-portfolio",
+        "demo": "https://digital-twin-portfolio-eight.vercel.app"
+      }
     },
     {
-      "id": "proj-team-planner",
-      "title": "Team Task Planner",
-      "situation": "Team struggled to track assignments and deadlines.",
-      "task": "Build a simple planner to manage tasks and priorities.",
-      "action": "Created a Kanban-style board with status and priority. Added export to CSV.",
-      "result": "Reduced missed deadlines and improved transparency across the team.",
-      "skills": ["JavaScript", "Git", "UX"]
+      "id": "proj-person-app-enhanced",
+      "title": "Person App with OAuth Authentication (Week 5)",
+      "situation": "Transition into advanced AI integration by mastering enterprise-grade authentication and security systems essential for production AI applications.",
+      "task": "Secure Person App using Auth.js with Google OAuth integration, implementing session management, and establishing robust security patterns for AI agent communications.",
+      "action": "Implemented Auth.js with Google OAuth, established session management, secured routes, and created enterprise security architecture. Enhanced with MCP server integration for CRUD operations.",
+      "result": "Transformed Person App into secure, enterprise-ready application with comprehensive authentication and MCP-enabled CRUD operations through AI agent architecture.",
+      "skills": ["Next.js", "Auth.js", "Google OAuth", "MCP Protocol", "Enterprise Security", "Session Management", "CRUD Operations"],
+      "week": 5,
+      "category": "Full-Stack",
+      "metrics": {
+        "Auth Providers": "1",
+        "Security Score": "A+",
+        "MCP Integration": "Yes",
+        "Response Time": "<300ms"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/person-search-app",
+        "demo": "https://person-search-app-alpha.vercel.app"
+      }
     },
     {
-      "id": "proj-responsive-ui",
-      "title": "Responsive UI Exercises",
-      "situation": "Need to practice fluid layouts across devices.",
-      "task": "Convert static pages to responsive layouts.",
-      "action": "Applied CSS grid/flex, fluid typography, and tested across breakpoints.",
-      "result": "Consistent experience on phones, tablets, and desktops.",
-      "skills": ["CSS Grid", "Flexbox", "Responsive Design"]
+      "id": "proj-person-crud-app",
+      "title": "Person App with CRUD Operations (Weeks 3-4)",
+      "situation": "Master sophisticated art of MCP server architecture and deployment by building production-ready Model Context Protocol servers that enhance large language model capabilities.",
+      "task": "Build MCP-enabled Person App allowing CRUD operations through MCP server integration, demonstrating AI agent architecture mastery and full-stack development.",
+      "action": "Developed complete Person App with full CRUD operations, database integration, and extended with MCP server functionality. Implemented TypeScript development patterns and production deployment strategies.",
+      "result": "Deployed production-ready Person App with seamless MCP integration, demonstrating expertise in AI-enhancing tools that integrate with large language models.",
+      "skills": ["Next.js", "MCP Protocol", "TypeScript", "CRUD Operations", "Database Integration", "AI Agent Architecture", "Vercel Deployment"],
+      "week": 4,
+      "category": "Full-Stack",
+      "metrics": {
+        "CRUD Operations": "4",
+        "MCP Integration": "Yes",
+        "Database Records": "500+",
+        "Performance": "95%"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/person-search",
+        "demo": "https://person-search-app-alpha.vercel.app"
+      }
     },
     {
-      "id": "proj-accessibility",
-      "title": "Accessibility Improvements",
-      "situation": "Project needed better keyboard and screen reader support.",
-      "task": "Audit and improve accessibility.",
-      "action": "Added ARIA labels, focus outlines, color contrast fixes, and skip links.",
-      "result": "WCAG AA compliance for primary flows.",
-      "skills": ["A11y", "Semantic HTML", "Testing"]
+      "id": "proj-professional-cv-website",
+      "title": "Professional CV Website with AI Generation (Week 2)",
+      "situation": "Establish mastery of modern web development through comprehensive hands-on experience with Next.js 15 and React 19, experiencing revolutionary shift from traditional coding to AI-enhanced development workflows.",
+      "task": "Create professional CV website using v0.dev AI generation, demonstrating mastery of AI-powered interface development and modern web deployment practices.",
+      "action": "Leveraged v0.dev for rapid prototyping, implemented Next.js 15 boilerplate, integrated Shadcn components with dark/light mode support, and deployed using Vercel with modern development tooling.",
+      "result": "Successfully deployed production-ready CV website demonstrating paradigm shift from traditional 'How do I...' to AI-powered 'Can you please...' development workflows.",
+      "skills": ["Next.js 15", "React 19", "v0.dev AI", "Shadcn Components", "Dark/Light Mode", "Vercel Deployment", "AI-Enhanced Development"],
+      "week": 2,
+      "category": "Portfolio",
+      "metrics": {
+        "Development Time": "Hours vs Weeks",
+        "AI Generation": "Yes",
+        "Deployment": "Yes",
+        "Performance": "95%"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/nextjs-boilerplate",
+        "demo": "https://nextjs-boilerplate-nu-ashy-90.vercel.app"
+      }
+    },
+    {
+      "id": "proj-dev-environment-setup",
+      "title": "Development Environment Setup Repository (Week 1)",
+      "situation": "Transform into AI Agent Developer by mastering modern development mindset and establishing comprehensive development environment with cutting-edge AI tools for enterprise systems.",
+      "task": "Configure professional-grade development environment including Node.js, VS Code Insider, GitHub Copilot, and Claude Desktop integration with MCP server connections.",
+      "action": "Established complete development environment with Node.js, Visual Studio Code, GitHub Copilot integration, and Claude Desktop MCP connections. Connected and documented three distinct MCP servers (Rolldice, Bootcamp AI Agent, Calendar Booking).",
+      "result": "Fully functional development environment with integrated AI tools and practical MCP server experience, serving as foundation for entire AI agent development program.",
+      "skills": ["Node.js", "VS Code Insider", "GitHub Copilot", "Claude Desktop", "MCP Protocol", "Development Environment", "AI Tools Integration"],
+      "week": 1,
+      "category": "Foundation",
+      "metrics": {
+        "MCP Servers": "3",
+        "AI Tools": "4",
+        "Environment Score": "100%",
+        "Documentation": "Complete"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/ai-agent-dev-setup--Marithea-Magno-"
+      }
+    },
+    {
+      "id": "proj-community-health-monitoring",
+      "title": "Community Health Monitoring System",
+      "situation": "Develop comprehensive health monitoring system for community healthcare management and patient tracking using native web technologies.",
+      "task": "Create full-stack web application for health data management, patient records, and community health analytics using PHP native technologies.",
+      "action": "Built complete system using PHP native, HTML, CSS, JavaScript, and MySQL database. Implemented patient registration, health data tracking, reporting dashboard, and administrative features.",
+      "result": "Deployed functional community health monitoring system with complete patient management, health analytics, and administrative reporting capabilities.",
+      "skills": ["PHP Native", "HTML", "CSS", "JavaScript", "MySQL", "Healthcare Systems", "Database Design", "Web Development"],
+      "week": 0,
+      "category": "Full-Stack",
+      "metrics": {
+        "Database Tables": "8+",
+        "User Roles": "3",
+        "Features": "10+",
+        "Admin Dashboard": "Yes"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/myprojects/tree/main/Community_Health"
+      }
+    },
+    {
+      "id": "proj-movie-reviews-laravel",
+      "title": "Movie Reviews System",
+      "situation": "Create comprehensive movie review platform for users to rate, review, and discover movies with social features using Laravel framework.",
+      "task": "Develop movie review application using Laravel framework with user authentication, movie database, and review management system.",
+      "action": "Implemented using Laravel and MySQL database, created user authentication system, movie catalog management, review and rating functionality, and administrative features.",
+      "result": "Successfully deployed movie review platform with complete user management, movie database, review system, and administrative controls.",
+      "skills": ["Laravel", "MySQL", "PHP", "MVC Architecture", "User Authentication", "Database Relations", "Web Framework"],
+      "week": 0,
+      "category": "Full-Stack",
+      "metrics": {
+        "Framework": "Laravel",
+        "Authentication": "Yes",
+        "CRUD Operations": "Yes",
+        "Admin Panel": "Yes"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/Quiz_laravel1"
+      }
+    },
+    {
+      "id": "proj-api-ecommerce-laravel",
+      "title": "API-Focused E-Commerce System",
+      "situation": "Develop API-centric e-commerce platform focusing on backend architecture and RESTful service design for scalable online retail operations.",
+      "task": "Create comprehensive e-commerce API using Laravel framework with complete product management, order processing, and administrative functionality.",
+      "action": "Built robust API using Laravel and MySQL, implemented RESTful endpoints for product catalog, shopping cart, order management, user authentication, and payment processing integration.",
+      "result": "Deployed scalable e-commerce API with comprehensive product management, secure order processing, and complete administrative backend system.",
+      "skills": ["Laravel", "MySQL", "RESTful APIs", "E-Commerce", "API Design", "Database Architecture", "Backend Development"],
+      "week": 0,
+      "category": "E-Commerce",
+      "metrics": {
+        "API Endpoints": "20+",
+        "Database Relations": "8+",
+        "Authentication": "JWT",
+        "Documentation": "Yes"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/api-e-commerce"
+      }
+    },
+    {
+      "id": "proj-student-management-system",
+      "title": "Student Management System",
+      "situation": "Create comprehensive student information management system for educational institutions to handle student records, enrollment, and academic tracking.",
+      "task": "Develop complete student management application using native PHP technologies with database integration for academic administration.",
+      "action": "Implemented using PHP native, HTML, CSS, JavaScript, and MySQL database. Created student registration system, course enrollment, grade management, and administrative dashboard.",
+      "result": "Successfully deployed student management system with complete academic record management, enrollment tracking, and administrative reporting capabilities.",
+      "skills": ["PHP Native", "HTML", "CSS", "JavaScript", "MySQL", "Academic Systems", "Student Records", "Administrative Dashboard"],
+      "week": 0,
+      "category": "Data Analytics",
+      "metrics": {
+        "Student Records": "100+",
+        "Course Management": "Yes",
+        "Grade Tracking": "Yes",
+        "Reports": "5+"
+      },
+      "links": {
+        "github": "https://github.com/TheaMarieM/3rdyear/tree/main/SIM"
+      }
     }
   ]
 }

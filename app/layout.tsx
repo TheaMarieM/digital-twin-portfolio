@@ -63,16 +63,6 @@ export default function RootLayout({
           }}
         />
         {children}
-        <footer className="mt-16 border-t border-[rgb(var(--border))]">
-          <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-[rgb(var(--muted))] flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <p>© {new Date().getFullYear()} Marithea Magno. All rights reserved.</p>
-            <div className="flex items-center gap-4">
-              <a href="#contact" className="hover:text-[rgb(var(--accent))]">Contact</a>
-              <a href="/about" className="hover:text-[rgb(var(--accent))]">About</a>
-              <a href="https://github.com/TheaMarieM" target="_blank" rel="noreferrer" className="hover:text-[rgb(var(--accent))]">GitHub</a>
-            </div>
-          </div>
-        </footer>
       </body>
     </html>
   );

@@ -219,25 +219,22 @@ export default function Home() {
               <a className={navItemClass("contact")} aria-current={activeId === "contact" ? "page" : undefined} href="#contact">Contact</a>
               <div className="relative group">
                 <button type="button" className="flex items-center gap-1 hover:text-[rgb(var(--accent))] transition-colors focus:outline-none">
-                  📚 Documentation
+                  Documentation
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
                 <div className="absolute right-0 mt-2 hidden w-72 rounded-xl border-2 border-[rgb(var(--border))] bg-[rgb(var(--card))] backdrop-blur-xl p-3 shadow-2xl z-50 group-hover:block group-focus-within:block">
-                  <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted))]">📚 Core Documentation</div>
+                  <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-purple-400">Core Documentation</div>
                   <a href="/projects" className="flex items-center rounded-lg px-3 py-2 text-sm hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all">
                     Project Portfolio
                   </a>
-                  <a href="/github" className="flex items-center rounded-lg px-3 py-2 text-sm hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all">
-                    GitHub Repositories
-                  </a>
-                  <a href="/demo" className="flex items-center rounded-lg px-3 py-2 text-sm hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all">
-                    Live Demonstrations
+                  <a href="/designs" className="flex items-center rounded-lg px-3 py-2 text-sm hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all">
+                    Design Showcase
                   </a>
                   
                   <div className="my-2 h-px bg-gradient-to-r from-transparent via-[rgb(var(--border))] to-transparent" />
-                  <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted))]">⚡ Technical Details</div>
+                  <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-pink-400">Technical Details</div>
                   <a href="/mcp-integration" className="flex items-center rounded-lg px-3 py-2 text-sm hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-pink-500/20 transition-all">
                     MCP Integration
                   </a>
@@ -296,12 +293,11 @@ export default function Home() {
               <a onClick={() => setMobileOpen(false)} className="px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="#ai">AI</a>
               <a onClick={() => setMobileOpen(false)} className="px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="#contact">Contact</a>
               
-              <div className="mt-3 px-3 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted))]">📚 Core Documentation</div>
+              <div className="mt-3 px-3 text-xs font-semibold uppercase tracking-wider text-purple-400">Core Documentation</div>
               <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/projects">Project Portfolio</a>
-              <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/github">GitHub Repositories</a>
-              <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/demo">Live Demonstrations</a>
+              <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/designs">Design Showcase</a>
               
-              <div className="mt-3 px-3 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted))]">⚡ Technical Details</div>
+              <div className="mt-3 px-3 text-xs font-semibold uppercase tracking-wider text-pink-400">Technical Details</div>
               <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/mcp-integration">MCP Integration</a>
               <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/advanced-features">Advanced Features</a>
               <a onClick={() => setMobileOpen(false)} className="flex items-center px-3 py-2 rounded hover:bg-[rgb(var(--card))]" href="/testing">Testing & Validation</a>
@@ -339,8 +335,8 @@ export default function Home() {
               </div>
             </div>
             <div className="relative mx-auto md:ml-auto">
-              <div className="float neon-edges glow-border h-48 w-48 md:h-56 md:w-56 rounded-full border-2 border-[rgb(var(--border))] bg-gradient-to-br from-[rgb(var(--card))] to-transparent shadow-2xl flex items-center justify-center text-6xl md:text-7xl overflow-hidden relative hover:scale-105 transition-transform duration-500">
-                <span aria-hidden className="relative z-10">👩‍💻</span>
+              <div className="float neon-edges glow-border h-48 w-48 md:h-56 md:w-56 rounded-full border-2 border-[rgb(var(--border))] bg-gradient-to-br from-purple-500/20 to-pink-500/20 shadow-2xl flex items-center justify-center overflow-hidden relative hover:scale-105 transition-transform duration-500">
+                <img src="/profile.png" alt="Marithea Magno" className="h-full w-full object-cover" />
                 <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
                 <div className="pointer-events-none absolute inset-0 shimmer" style={{background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)'}} />
                 <div className="pointer-events-none absolute -right-2 top-8 h-3 w-3 rounded-full animate-pulse shadow-lg" style={{background: 'linear-gradient(135deg, rgb(168 85 247), rgb(236 72 153))'}} />
@@ -416,34 +412,48 @@ export default function Home() {
             <div className="md:col-span-2">
               {/* Core Technologies */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-4 text-purple-400">🚀 Core Technologies</h3>
+                <h3 className="text-lg font-semibold mb-4 text-purple-400">Core Technologies</h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {[
-                    { name: "Next.js", desc: "React framework • SSR", icon: "⚛️" },
-                    { name: "Python", desc: "RAG systems • AI integration", icon: "🐍" },
-                    { name: "TypeScript", desc: "Type-safe development", icon: "📘" },
-                    { name: "Tailwind CSS", desc: "Modern UI design", icon: "🎨" },
-                    { name: "Laravel", desc: "PHP framework • APIs", icon: "🔧" },
-                    { name: "MySQL", desc: "Database design", icon: "🗄️" }
-                  ].map((tech, i) => (
-                    <div key={i} className="group flex items-center gap-3 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-4 shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-1 hover:ring-[rgb(var(--accent))]/40">
-                      <span className="text-2xl">{tech.icon}</span>
-                      <div>
-                        <div className="font-medium">{tech.name}</div>
-                        <div className="text-xs text-[rgb(var(--muted))]">{tech.desc}</div>
+                    { name: "Next.js", desc: "React framework • SSR", logo: "svg-nextjs" },
+                    { name: "Python", desc: "RAG systems • AI integration", logo: "svg-python" },
+                    { name: "TypeScript", desc: "Type-safe development", logo: "svg-typescript" },
+                    { name: "Tailwind CSS", desc: "Modern UI design", logo: "svg-tailwind" },
+                    { name: "Laravel", desc: "PHP framework • APIs", logo: "svg-laravel" },
+                    { name: "MySQL", desc: "Database design", logo: "svg-mysql" }
+                  ].map((tech, i) => {
+                    const logos = {
+                      "svg-nextjs": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M11.5 0C5.1 0 0 5.1 0 11.5S5.1 23 11.5 23 23 17.9 23 11.5 17.9 0 11.5 0zm6.5 12h-5v5h-3v-5H5V9h5V4h3v5h5v3z"/></svg>,
+                      "svg-python": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.5 18c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3zm3-7h-2.5v-5h2.5v5zm0-6h-2.5v-1h2.5v1zm3 7h-2.5v-5h2.5v5zm0-6h-2.5v-1h2.5v1z"/></svg>,
+                      "svg-typescript": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#3178c6"><path d="M0 12v12h24V0H0v12zm19.341-6.85a3.56 3.56 0 011.856 1.284c.314.453.611 1.123.611 1.416v.732h-2.004v-.413c0-.88-.329-1.348-1.788-1.348-.839 0-1.561.471-1.561 1.066 0 .477.201.848 1.305 1.129l.789.197c2.081.512 2.964 1.272 2.964 2.824 0 1.933-1.534 3.058-3.941 3.058-1.309 0-2.494-.326-3.214-1.008-.576-.521-.915-1.334-.915-2.148v-.714h2.004v.428c0 1.077.36 1.52 1.586 1.52.839 0 1.561-.428 1.561-1.041 0-.477-.201-.851-1.305-1.129l-.789-.197c-2.081-.512-2.964-1.272-2.964-2.824 0-1.933 1.534-3.058 3.941-3.058 1.309 0 2.494.326 3.214 1.008.576.521.915 1.334.915 2.148z"/></svg>,
+                      "svg-tailwind": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#06b6d4"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1.5 6c1.93 0 3.5 1.57 3.5 3.5S12.43 13 10.5 13 7 11.43 7 9.5 8.57 6 10.5 6z"/></svg>,
+                      "svg-laravel": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#FF2D20"><path d="M23.642 5.43a.845.845 0 00-.923-.043L11.986 12.84 2.281 5.387A.845.845 0 001.358 6.33v11.34a.845.845 0 001.358.943l9.705-7.453 10.733 7.453a.845.845 0 001.358-.943V6.33a.845.845 0 00-.47-.9z"/></svg>,
+                      "svg-mysql": <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#00758F"><path d="M16.405 5.501c-.115 0-.193.035-.274.059v.053h.241c.086 0 .154-.053.154-.106 0-.087-.058-.006-.121-.006zm-4.732.053h.241v-.053c-.08-.024-.159-.059-.274-.059-.06 0-.115.087-.115.106 0 .053.069.106.148.106h.244v-.053zm3.469.053h.244v-.053c-.08-.024-.159-.059-.274-.059-.06 0-.115.087-.115.106 0 .053.068.106.148.106h.245v-.053zm-1.734 0h.244v-.053c-.08-.024-.159-.059-.274-.059-.06 0-.115.087-.115.106 0 .053.068.106.148.106h.241v-.053z"/></svg>
+                    };
+                    return (
+                      <div key={i} className="group flex items-center gap-3 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-4 shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-1 hover:ring-[rgb(var(--accent))]/40">
+                        <div className="h-10 w-10 rounded-lg bg-[rgb(var(--bg))] flex items-center justify-center flex-shrink-0 text-purple-400">
+                          {logos[tech.logo]}
+                        </div>
+                        <div>
+                          <div className="font-medium">{tech.name}</div>
+                          <div className="text-xs text-[rgb(var(--muted))]">{tech.desc}</div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Specialized Tools */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-4 text-emerald-400">🛠️ Specialized Tools I've Built</h3>
+                <h3 className="text-lg font-semibold mb-4 text-emerald-400">Specialized Tools I've Built</h3>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="p-4 rounded-xl border-2 border-emerald-500/20 bg-emerald-500/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl">🤖</span>
+                      <div className="h-8 w-8 rounded-lg bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <div className="h-4 w-4 rounded-sm bg-white/30" />
+                      </div>
                       <h4 className="font-semibold">MCP Server (7 Tools)</h4>
                     </div>
                     <p className="text-sm text-[rgb(var(--muted))] mb-2">FastAPI server with portfolio queries, interview Q&A, and RAG search</p>
@@ -455,7 +465,9 @@ export default function Home() {
                   </div>
                   <div className="p-4 rounded-xl border-2 border-purple-500/20 bg-purple-500/5">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl">💬</span>
+                      <div className="h-8 w-8 rounded-lg bg-purple-500 flex items-center justify-center flex-shrink-0">
+                        <div className="h-4 w-4 rounded-sm bg-white/30" />
+                      </div>
                       <h4 className="font-semibold">Digital Twin RAG System</h4>
                     </div>
                     <p className="text-sm text-[rgb(var(--muted))] mb-2">AI assistant with 20 embedded profile chunks and intelligent responses</p>
@@ -470,14 +482,16 @@ export default function Home() {
 
               {/* Design Tools */}
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-pink-400">🎯 Design & Creative Tools</h3>
+                <h3 className="text-lg font-semibold mb-4 text-pink-400">Design & Creative Tools</h3>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {[
-                    { name: "Figma", desc: "UI/UX prototyping • 5+ apps designed", icon: "🎨" },
-                    { name: "Adobe Suite", desc: "Photoshop • Poster commissions", icon: "📸" }
+                    { name: "Figma", desc: "UI/UX prototyping • 5+ apps designed", icon: "F" },
+                    { name: "Adobe Suite", desc: "Photoshop • Poster commissions", icon: "Aa" }
                   ].map((tool, i) => (
                     <div key={i} className="group flex items-center gap-3 rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-4 shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:ring-1 hover:ring-pink-500/40">
-                      <span className="text-2xl">{tool.icon}</span>
+                      <div className="h-10 w-10 rounded-lg bg-pink-500/20 flex items-center justify-center flex-shrink-0 text-pink-400 font-bold text-sm">
+                        {tool.icon}
+                      </div>
                       <div>
                         <div className="font-medium">{tool.name}</div>
                         <div className="text-xs text-[rgb(var(--muted))]">{tool.desc}</div>
@@ -565,11 +579,11 @@ export default function Home() {
                       <li>Database integration via Prisma ORM</li>
                     </ul>
                     <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Next.js</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Tailwind</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Prisma</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Auth</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">JSON API</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-purple-500/30 bg-purple-500/10 px-2.5 py-1 text-purple-300"><span>▲</span> Next.js</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-blue-500/30 bg-blue-500/10 px-2.5 py-1 text-blue-300"><span>◈</span> Tailwind</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-1 text-yellow-300"><span>P</span> Prisma</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-green-500/30 bg-green-500/10 px-2.5 py-1 text-green-300"><span>🔐</span> Auth</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-1 text-indigo-300"><span>J</span> JSON API</span>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-3 text-sm">
                       <a href="https://github.com/TheaMarieM/person-search-app" target="_blank" rel="noreferrer" className="inline-flex items-center rounded-md border border-[rgb(var(--border))] px-3 py-1.5 hover:bg-[rgb(var(--card))]">GitHub</a>
@@ -592,10 +606,10 @@ export default function Home() {
                       <li>Search/filter by title and rating</li>
                     </ul>
                     <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Laravel</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Blade</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">CRUD</span>
-                      <span className="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1">Ratings</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-red-300"><span>L</span> Laravel</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-amber-300"><span>B</span> Blade</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-cyan-300"><span>⚙</span> CRUD</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-md border border-yellow-500/30 bg-yellow-500/10 px-2.5 py-1 text-yellow-300"><span>⭐</span> Ratings</span>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-3 text-sm">
                       <a href="https://github.com/TheaMarieM/Quiz_laravel1" target="_blank" rel="noreferrer" className="inline-flex items-center rounded-md border border-[rgb(var(--border))] px-3 py-1.5 hover:bg-[rgb(var(--card))]">GitHub</a>
@@ -811,7 +825,7 @@ export default function Home() {
                 
                 {/* Quick prompts */}
                 <div className="mt-6 space-y-2">
-                  <p className="text-xs font-medium text-[rgb(var(--muted))]">💡 Quick Questions:</p>
+                  <p className="text-xs font-medium text-purple-400">Quick Questions:</p>
                   {[
                     "What are your key skills?",
                     "Tell me about your projects",
@@ -870,7 +884,7 @@ export default function Home() {
                     <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`} style={{animation: 'slideUp 0.3s ease-out'}}>
                       {/* Avatar */}
                       <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold ${msg.role === 'user' ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-md' : 'bg-gradient-to-br from-violet-500 to-purple-500 text-white shadow-md'}`}>
-                        {msg.role === 'user' ? '👤' : '🤖'}
+                        {msg.role === 'user' ? 'U' : 'AI'}
                       </div>
                       {/* Message bubble */}
                       <div className={`flex-1 max-w-[85%]`}>
@@ -888,7 +902,7 @@ export default function Home() {
                   {chatLoading && (
                     <div className="flex gap-3" style={{animation: 'slideUp 0.3s ease-out'}}>
                       <div className="flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold bg-gradient-to-br from-violet-500 to-purple-500 text-white shadow-md">
-                        🤖
+                        AI
                       </div>
                       <div className="flex-1">
                         <div className="rounded-2xl px-4 py-3 bg-[rgb(var(--border))] shadow-md max-w-fit">
@@ -968,12 +982,14 @@ export default function Home() {
         </section>
 
         {/* Get In Touch */}
-        <section id="contact" className="py-20">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="md:col-span-1">
-              <h2 className="text-2xl font-semibold">Get In Touch</h2>
-              <div className="mt-2 h-1 w-16 rounded bg-gradient-to-r from-pink-500 to-sky-500"></div>
-            </div>
+        <section id="contact" className="py-24">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Get In Touch</h2>
+            <div className="mt-3 h-1.5 w-20 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"></div>
+            <p className="mt-4 text-base text-[rgb(var(--muted))]">Let's connect and build something amazing together</p>
+          </div>
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div className="md:col-span-2">
               <div className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] p-6 shadow-soft">
                 <p className="text-[rgb(var(--muted))]">Ready to collaborate? I’m open to opportunities and interesting projects.</p>
@@ -991,43 +1007,60 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm mt-20">
-          <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-8 py-12">
-          <div className="grid gap-8 md:grid-cols-3">
-            <div>
-              <h3 className="font-bold text-lg bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Marithea Magno</h3>
-              <p className="mt-2 text-sm text-[rgb(var(--muted))]">IT Student & Web Developer passionate about creating beautiful, functional web experiences.</p>
+      </main>
+
+      <footer className="border-t border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm mt-20">
+        <div className="mx-auto w-full max-w-7xl px-6 lg:px-8 py-12">
+          <div className="grid gap-8 md:grid-cols-3 mb-12">
+              <div className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 p-6">
+                <h3 className="font-bold text-lg bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Marithea Magno</h3>
+                <p className="mt-3 text-sm text-[rgb(var(--muted))]">IT Student & Web Developer passionate about creating beautiful, functional web experiences.</p>
+              </div>
+              <div className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 p-6">
+                <h4 className="font-semibold mb-3">Quick Links</h4>
+                <nav className="flex flex-col gap-2 text-sm">
+                  <a href="#about" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">About</a>
+                  <a href="#experience" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">Experience</a>
+                  <a href="#skills" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">Skills</a>
+                  <a href="#ai" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">AI Assistant</a>
+                </nav>
+              </div>
+              <div className="rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 p-6">
+                <h4 className="font-semibold mb-3">Connect</h4>
+                <div className="flex gap-3">
+                  <a href="https://github.com/TheaMarieM" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="GitHub">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
+                  </a>
+                  <a href="https://www.linkedin.com/in/marithea-magno-33038728a/" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="LinkedIn">
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  </a>
+                  <a href="mailto:magnomarithea157@gmail.com" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="Email">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  </a>
+                </div>
+              </div>
             </div>
-            <div>
-              <h4 className="font-semibold mb-3">Quick Links</h4>
-              <nav className="flex flex-col gap-2 text-sm">
-                <a href="#about" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">About</a>
-                <a href="#experience" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">Experience</a>
-                <a href="#skills" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">Skills</a>
-                <a href="#ai" className="text-[rgb(var(--muted))] hover:text-[rgb(var(--accent))] transition-colors">AI Assistant</a>
-              </nav>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Connect</h4>
-              <div className="flex gap-3">
-                <a href="https://github.com/TheaMarieM" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="GitHub">
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" /></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/marithea-magno-33038728a/" target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="LinkedIn">
-                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="mailto:magnomarithea157@gmail.com" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border))] bg-[rgb(var(--bg))] hover:bg-[rgb(var(--card))] hover:border-[rgb(var(--accent))] transition-all duration-300 hover:scale-110" aria-label="Email">
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </a>
+            <div className="border-t border-[rgb(var(--border))] pt-8 mt-8">
+              <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 text-sm">
+                <p className="text-[rgb(var(--muted))]">© {new Date().getFullYear()} Marithea Magno. All rights reserved.</p>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-[rgb(var(--muted))]">Built with</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="px-3 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 font-medium text-xs">
+                      Next.js
+                    </span>
+                    <span className="px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-medium text-xs">
+                      TypeScript
+                    </span>
+                    <span className="px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 font-medium text-xs">
+                      Tailwind CSS
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="mt-8 border-t border-[rgb(var(--border))] pt-6 text-center text-sm text-[rgb(var(--muted))]">
-            <p>© {new Date().getFullYear()} Marithea Magno. Built with Next.js, Tailwind CSS, and ❤️</p>
-          </div>
-        </div>
-      </footer>
-    </main>
+        </footer>
 
     {lightbox && (
           <div role="dialog" aria-modal className="fixed inset-0 z-50">
