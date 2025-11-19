@@ -13,18 +13,42 @@ export default function ThemeToggle({ className = '' }: ThemeToggleProps) {
   useEffect(() => {
     setMounted(true);
     
-    // Check current state from DOM instead of localStorage to avoid conflicts
-    const isDark = document.documentElement.classList.contains('dark');
-    setIsDarkMode(isDark);
+    // Initialize from multiple sources for reliability
+    const initTheme = () => {
+      const saved = localStorage.getItem('theme');
+      const hasDataAttr = document.documentElement.getAttribute('data-theme');
+      const hasDarkClass = document.documentElement.classList.contains('dark');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // Determine current state with fallbacks
+      let isDark = false;
+      if (saved === 'dark' || saved === 'light') {
+        isDark = saved === 'dark';
+      } else if (hasDataAttr) {
+        isDark = hasDataAttr === 'dark';
+      } else if (hasDarkClass) {
+        isDark = true;
+      } else {
+        isDark = prefersDark;
+      }
+      
+      setIsDarkMode(isDark);
+      
+      // Ensure DOM is in sync
+      const el = document.documentElement;
+      el.classList.toggle('dark', isDark);
+      el.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      el.style.colorScheme = isDark ? 'dark' : 'light';
+    };
+    
+    initTheme();
     
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
-      const savedTheme = localStorage.getItem('theme');
-      if (!savedTheme) {
-        const shouldBeDark = mediaQuery.matches;
-        setIsDarkMode(shouldBeDark);
-        document.documentElement.classList.toggle('dark', shouldBeDark);
+      const saved = localStorage.getItem('theme');
+      if (!saved) {
+        initTheme();
       }
     };
     
@@ -35,7 +59,12 @@ export default function ThemeToggle({ className = '' }: ThemeToggleProps) {
   const toggleTheme = () => {
     const newIsDark = !isDarkMode;
     setIsDarkMode(newIsDark);
-    document.documentElement.classList.toggle('dark', newIsDark);
+    
+    const el = document.documentElement;
+    el.classList.toggle('dark', newIsDark);
+    el.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
+    el.style.colorScheme = newIsDark ? 'dark' : 'light';
+    
     localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
   };
 

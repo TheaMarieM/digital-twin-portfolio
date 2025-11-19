@@ -34,16 +34,32 @@
   }
 }
 
-/* Ensure class-based dark mode also flips tokens */
-html.dark {
-  --bg: 10 7 25;
-  --card: 26 20 55;
-  --text: 236 233 252;
-  --muted: 183 170 220;
-  --accent: 217 70 239;
-  --ring: 217 70 239;
-  --border: 64 38 97;
-  --shadow: 0 20px 60px rgba(0,0,0,0.6);
+/* Ensure class-based dark mode also flips tokens with higher specificity */
+html.dark,
+html[data-theme="dark"] {
+  --bg: 10 7 25 !important;
+  --card: 26 20 55 !important;
+  --text: 236 233 252 !important;
+  --muted: 183 170 220 !important;
+  --accent: 217 70 239 !important;
+  --ring: 217 70 239 !important;
+  --border: 64 38 97 !important;
+  --shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
+  color-scheme: dark;
+}
+
+/* Force light mode variables */
+html:not(.dark),
+html[data-theme="light"] {
+  --bg: 255 255 255 !important;
+  --card: 252 250 255 !important;
+  --text: 17 24 39 !important;
+  --muted: 100 116 139 !important;
+  --accent: 168 85 247 !important;
+  --ring: 168 85 247 !important;
+  --border: 221 214 244 !important;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+  color-scheme: light;
 }
 
 html {

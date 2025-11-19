@@ -29,13 +29,34 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
             (function() {
-              try {
-                var saved = localStorage.getItem('theme');
-                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var shouldDark = saved ? saved === 'dark' : prefersDark;
-                var el = document.documentElement;
-                if (shouldDark) el.classList.add('dark'); else el.classList.remove('dark');
-              } catch (_) {}
+              function setTheme() {
+                try {
+                  var saved = localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var shouldDark = saved === 'dark' || (!saved && prefersDark);
+                  var el = document.documentElement;
+                  
+                  if (shouldDark) {
+                    el.classList.add('dark');
+                    el.setAttribute('data-theme', 'dark');
+                  } else {
+                    el.classList.remove('dark');
+                    el.setAttribute('data-theme', 'light');
+                  }
+                  
+                  // Force immediate style update
+                  el.style.colorScheme = shouldDark ? 'dark' : 'light';
+                } catch (e) {
+                  console.warn('Theme initialization failed:', e);
+                }
+              }
+              
+              setTheme();
+              
+              // Retry on DOM ready if needed
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setTheme);
+              }
             })();
           `,
           }}
