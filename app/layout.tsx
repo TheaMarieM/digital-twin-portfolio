@@ -24,6 +24,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            (function() {
+              try {
+                var saved = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var shouldDark = saved ? saved === 'dark' : prefersDark;
+                var el = document.documentElement;
+                if (shouldDark) el.classList.add('dark'); else el.classList.remove('dark');
+              } catch (_) {}
+            })();
+          `,
+          }}
+        />
+      </head>
       <body
         suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
@@ -47,21 +64,6 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function() {
-              try {
-                var saved = localStorage.getItem('theme');
-                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                var shouldDark = saved ? saved === 'dark' : prefersDark;
-                var el = document.documentElement;
-                if (shouldDark) el.classList.add('dark'); else el.classList.remove('dark');
-              } catch (_) {}
-            })();
-          `,
-          }}
-        />
         {children}
       </body>
     </html>

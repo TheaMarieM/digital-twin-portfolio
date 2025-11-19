@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test</title>
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var shouldDark = saved ? saved === 'dark' : prefersDark;
+                var el = document.documentElement;
+                if (shouldDark) el.classList.add('dark'); else el.classList.remove('dark');
+                console.log('Theme init - saved:', saved, 'prefersDark:', prefersDark, 'shouldDark:', shouldDark);
+            } catch (e) {
+                console.error('Theme init error:', e);
+            }
+        })();
+    </script>
+    <style>
+        :root {
+            --bg: 255 255 255;
+            --text: 17 24 39;
+        }
+        
+        html.dark {
+            --bg: 10 7 25;
+            --text: 236 233 252;
+        }
+        
+        body {
+            background: rgb(var(--bg));
+            color: rgb(var(--text));
+            font-family: system-ui;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        button {
+            background: rgb(var(--text));
+            color: rgb(var(--bg));
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Theme Toggle Test</h1>
+    <p>Current mode: <span id="mode"></span></p>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+    <p>localStorage theme: <span id="stored"></span></p>
+    <p>System preference: <span id="system"></span></p>
+    
+    <script>
+        function updateStatus() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const stored = localStorage.getItem('theme') || 'auto';
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            
+            document.getElementById('mode').textContent = isDark ? 'dark' : 'light';
+            document.getElementById('stored').textContent = stored;
+            document.getElementById('system').textContent = system;
+            
+            console.log('Status update - isDark:', isDark, 'stored:', stored, 'system:', system);
+        }
+        
+        function toggleTheme() {
+            const el = document.documentElement;
+            const newIsDark = !el.classList.contains('dark');
+            
+            console.log('Toggle theme - current dark:', el.classList.contains('dark'), 'new dark:', newIsDark);
+            
+            el.classList.toggle('dark', newIsDark);
+            localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+            
+            updateStatus();
+        }
+        
+        // Initial status
+        updateStatus();
+        
+        // Listen for system changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateStatus);
+    </script>
+</body>
+</html>

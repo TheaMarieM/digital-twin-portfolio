@@ -12,12 +12,24 @@ export default function ThemeToggle({ className = '' }: ThemeToggleProps) {
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
     
-    setIsDarkMode(shouldBeDark);
-    document.documentElement.classList.toggle('dark', shouldBeDark);
+    // Check current state from DOM instead of localStorage to avoid conflicts
+    const isDark = document.documentElement.classList.contains('dark');
+    setIsDarkMode(isDark);
+    
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (!savedTheme) {
+        const shouldBeDark = mediaQuery.matches;
+        setIsDarkMode(shouldBeDark);
+        document.documentElement.classList.toggle('dark', shouldBeDark);
+      }
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   const toggleTheme = () => {
