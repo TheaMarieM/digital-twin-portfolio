@@ -61,7 +61,16 @@ def chunk_texts(profile: dict) -> List[dict]:
     return chunks
 
 
-def embed_texts(model: SentenceTransformer, texts: List[str]) -> List[List[float]]:
+def embed_texts(model, texts):
+    """Embed texts using SentenceTransformer model.
+    
+    Args:
+        model: SentenceTransformer model instance
+        texts: List of strings to embed
+        
+    Returns:
+        List of embeddings as lists of floats
+    """
     embeddings = model.encode(texts, show_progress_bar=False)
     # convert to python floats
     return [list(map(float, e)) for e in embeddings]

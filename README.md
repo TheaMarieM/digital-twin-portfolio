@@ -1,92 +1,219 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿#  Digital Twin Portfolio
 
-## Getting Started
+> **AI-Powered Portfolio with MCP Integration, RAG System, and Production-Ready Security**
 
-First, run the development server:
+A Next.js portfolio application featuring a digital twin AI assistant powered by Claude Desktop, Groq LLaMA 3.3, and semantic search capabilities. Built with enterprise-grade security, rate limiting, and comprehensive testing.
+
+[![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?style=flat&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-MCP_Server-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Groq](https://img.shields.io/badge/Groq-LLaMA_3.3-orange?style=flat)](https://groq.com/)
+
+---
+
+##  Features
+
+###  **Modern UI/UX**
+- **Gradient Theme**: Purple-to-pink gradient design with glassmorphism effects
+- **Dark Mode**: Full theme toggle support with CSS custom properties
+- **Responsive Design**: Mobile-first approach with adaptive layouts
+- **Custom Animations**: Smooth transitions, hover effects, and micro-interactions
+- **Floating Cat Assistant**: Animated cat button for AI chat navigation
+- **Professional Footer**: Social links with gradient hover effects
+
+###  **AI & MCP Integration**
+- **Claude Desktop Integration**:  **OPERATIONAL** - Full MCP protocol support
+- **7 Production Tools**: Portfolio queries, skills assessment, interview prep, RAG search
+- **Digital Twin Assistant**: Context-aware responses about professional experience
+- **FastAPI MCP Server**: HTTP and stdio communication modes
+
+###  **RAG System**
+- **Semantic Search**: Upstash Vector with 16 embedded portfolio chunks
+- **OpenAI Embeddings**: text-embedding-3-small for high-quality vectors
+- **Context Retrieval**: Intelligent portfolio data extraction
+- **Local Embeddings**: Optional sentence-transformers (384-dim) for development
+
+###  **Enterprise Security**
+- **Rate Limiting**: Redis-based distributed rate limiting (20 req/min chat, 30 req/min RAG)
+- **Input Validation**: Comprehensive message/query sanitization
+- **Content Filtering**: API key detection, password filtering, prompt injection prevention
+- **Crypto-Secure Sessions**: 256-bit secure session ID generation
+- **Security Headers**: X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- **Session Management**: 100 messages per session limit with automatic cleanup
+
+###  **Data Management**
+- **Upstash Redis**: Chat history, session storage, rate limiting
+- **STAR Format**: 5 structured professional experience items
+- **Interview Q&A**: 10 pre-generated interview training pairs
+- **Semantic Cache**: Cosine similarity (0.95 threshold), 100-item capacity, 30-min TTL
+
+---
+
+##  Quick Start
+
+### Prerequisites
+
+- **Node.js** 18+ and **pnpm** installed
+- **Python** 3.8+ with **pip**
+- **Upstash** accounts (Redis + Vector)
+- **Groq API** key (or OpenAI for embeddings)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/TheaMarieM/digital-twin-portfolio.git
+cd digital-twin-portfolio
+
+# Install Node.js dependencies
+pnpm install
+
+# Create Python virtual environment
+python -m venv .venv
+.venv\Scripts\Activate.ps1  # Windows PowerShell
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
+```
+
+### Environment Variables
+
+Create a .env.local file with the following:
+
+```env
+# OpenAI (for embeddings)
+OPENAI_API_KEY=sk-...
+
+# Groq (for LLM responses)
+GROQ_API_KEY=gsk_...
+
+# Upstash Vector
+UPSTASH_VECTOR_REST_URL=https://...upstash.io
+UPSTASH_VECTOR_REST_TOKEN=...
+
+# Upstash Redis
+UPSTASH_REDIS_REST_URL=https://...upstash.io
+UPSTASH_REDIS_REST_TOKEN=...
+```
+
+### Running the Application
+
+```bash
+# Start Next.js dev server
 pnpm dev
+# Open http://localhost:3001
+
+# Start MCP server (optional, for Claude Desktop)
+python mcp/server.py
+# Server runs on http://127.0.0.1:3000
 ```
 
-**Note:** This project uses `pnpm` as the package manager.
+---
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+##  Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+my-ai-app/
+ app/                        # Next.js App Router
+    api/
+       chat/              # AI chat endpoint (Groq + LLaMA 3.3)
+       rag/               # RAG semantic search endpoint
+       metrics/           # Performance metrics
+    components/
+       sections/          # Page sections (Hero, Skills, Contact)
+       ui/                # Reusable UI components
+    page.tsx               # Home page with all sections
+ mcp/                        # Model Context Protocol Server
+    server.py              # FastAPI HTTP server (port 3000)
+    stdio_server.py        # stdio MCP server for Claude Desktop
+    tools/                 # MCP tool implementations
+        portfolio_tools.py # Portfolio queries, projects, skills
+        interview_tools.py # Interview Q&A, question generation
+        rag_tools.py       # Semantic search, embeddings
+ data/
+    profile.json           # 5 STAR-format portfolio items
+    interview_qa.jsonl     # 10 interview training Q&A pairs
+ scripts/
+    chat_with_ollama.py    # CLI chat with RAG
+    index_local_embeddings.py # Vector database upserter
+ docs/
+     CLAUDE_DESKTOP_SETUP.md # MCP setup for Claude Desktop
+     VERCEL_DEPLOY.md        # Vercel deployment guide
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Features
+##  MCP Server
 
-- 🎨 **Enhanced UI**: Gradient purple-to-pink theme with glassmorphism effects
-- 🤖 **AI Chat Assistant**: Powered by Groq + LLaMA 3.3-70b
-- 🔍 **RAG System**: Semantic search with Upstash Vector (16 embedded chunks)
-- 💾 **Conversation History**: Upstash Redis for session management
-- 🎯 **MCP Server**: FastAPI-based server with 7 production tools (port 3000)
-- 📱 **Responsive Design**: Mobile-friendly with custom scrollbar and animations
-- 🌙 **Dark Mode**: Theme toggle support
-- ✨ **Modern UI**: Rounded-full buttons, gradient text, icon badges, professional footer
-- 🤖 **Claude Desktop Integration**: ✅ **ACTIVE** - Digital twin assistant
-- 📊 **MCP Protocol**: ✅ **WORKING** - Live portfolio data access
-- 🎓 **Interview Preparation**: ✅ **READY** - AI-powered practice sessions
+### Available Tools
 
-## MCP Server Integration
+| Tool | Description |
+|------|-------------|
+| query_portfolio | Natural language portfolio queries |
+| get_projects | List all projects with STAR details |
+| get_skills | Extract technical skills by category |
+| search_experience | Keyword-based experience search |
+| ask_interview_question | Portfolio-based interview answers |
+| get_interview_questions | Common interview questions by category |
+| semantic_search | RAG-powered semantic search |
 
-✅ **STATUS: FULLY OPERATIONAL** 
+---
 
-The MCP (Model Context Protocol) server provides live portfolio data access to Claude Desktop:
+##  Security Features
 
-### Production Tools Available
-- **Portfolio Queries**: Direct access to 5 STAR-format projects
-- **Skills Assessment**: Technical skills with proficiency levels  
-- **Interview Preparation**: AI-powered Q&A generation
-- **RAG Semantic Search**: Context-aware portfolio search
+### Rate Limiting
+- **Chat API**: 20 requests/minute (Redis-based, distributed)
+- **RAG API**: 30 requests/minute (in-memory, per-session)
 
-### Claude Desktop Usage
+### Input Validation
+- **Message Length**: 500 characters max for chat, 300 for RAG
+- **Session Messages**: 100 messages per session limit
+- **Content Filtering**: API key detection, password filtering, SQL injection prevention
+
+---
+
+##  Deployment
+
+### Vercel
+
 ```bash
-# Example queries that work:
-"What are your technical skills?"
-"Tell me about your HTML/CSS expertise"
-"What projects showcase your accessibility work?"
-"Generate interview questions for frontend roles"
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel --prod
+
+# Set environment variables:
+vercel env add OPENAI_API_KEY
+vercel env add GROQ_API_KEY
+vercel env add UPSTASH_VECTOR_REST_URL
+vercel env add UPSTASH_VECTOR_REST_TOKEN
+vercel env add UPSTASH_REDIS_REST_URL
+vercel env add UPSTASH_REDIS_REST_TOKEN
 ```
 
-### Development Access
-- **HTTP API**: http://localhost:3000 (7 tools)
-- **MCP Protocol**: stdio communication for Claude Desktop
-- **Testing**: `python test_mcp_direct.py` for validation
+---
 
-## Learn More
+##  Documentation
 
-To learn more about Next.js, take a look at the following resources:
+- **[CLAUDE_DESKTOP_SETUP.md](docs/CLAUDE_DESKTOP_SETUP.md)**: MCP integration guide
+- **[VERCEL_DEPLOY.md](docs/VERCEL_DEPLOY.md)**: Deployment instructions
+- **[agents.md](agents.md)**: Copilot coding instructions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  Contact
 
-## Deploy on Vercel
+**Thea Marie**  
+- GitHub: [@TheaMarieM](https://github.com/TheaMarieM)
+- LinkedIn: [linkedin.com/in/theamarie](https://linkedin.com/in/theamarie)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-### Quick Vercel deployment notes
-
-This repo includes a minimal `vercel.json` and a `docs/VERCEL_DEPLOY.md` with PowerShell-friendly steps to add environment variables and deploy via the Vercel CLI or Dashboard. Important env vars you will need to configure in Vercel:
-
-- `OPENAI_API_KEY` — your OpenAI API key (must be from a billed account for production embeddings)
-- `UPSTASH_VECTOR_REST_URL` — Upstash Vector REST endpoint
-- `UPSTASH_VECTOR_REST_TOKEN` — Upstash Vector REST token (secret)
-- `UPSTASH_VECTOR_INDEX` — vector index name (e.g., `portfolio`)
-- `EMBEDDING_MODEL` — optional, e.g. `text-embedding-3-small`
-
-See `docs/VERCEL_DEPLOY.md` for CLI commands and dashboard steps.
-
-### Additional Environment Variables
-
-For full functionality, you'll also need:
-
-- `GROQ_API_KEY` — Groq API key for LLaMA 3.3 integration
-- `UPSTASH_REDIS_REST_URL` — Upstash Redis REST endpoint
-- `UPSTASH_REDIS_REST_TOKEN` — Upstash Redis REST token
+<div align="center">
+  <p>Made with  by Thea Marie</p>
+</div>

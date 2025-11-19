@@ -28,7 +28,7 @@ import argparse
 from typing import List
 
 import openai
-from upstash_vector import Index, Vector
+from upstash_vector import Index, Vector  # type: ignore
 
 
 def chunk_text(text: str, max_chars: int = 1000) -> List[str]:

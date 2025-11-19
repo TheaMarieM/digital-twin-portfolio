@@ -18,13 +18,22 @@ const sections = [
       { href: "/testing", label: "Testing & Validation" },
     ],
   },
+  {
+    title: "Performance & Operations",
+    pages: [
+      { href: "/optimization", label: "Query Optimization" },
+      { href: "/monitoring", label: "Performance Monitoring" },
+      { href: "/scalability", label: "Load Testing & Scalability" },
+      { href: "/operations", label: "Production Operations" },
+    ],
+  },
 ];
 
 export default function DocsNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="lg:sticky lg:top-0 lg:h-screen overflow-y-auto border-b lg:border-b-0 lg:border-r border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm px-6 py-8 w-full lg:w-[320px] lg:min-w-[320px]">
+    <aside className="lg:sticky lg:top-14 lg:h-[calc(100vh-3.5rem)] overflow-y-auto border-b lg:border-b-0 lg:border-r border-[rgb(var(--border))] bg-[rgb(var(--card))]/50 backdrop-blur-sm px-6 py-8 w-full lg:w-[320px] lg:min-w-[320px]">
       <nav className="space-y-8">
         <div>
           <Link
@@ -43,7 +52,7 @@ export default function DocsNav() {
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-purple-400">
               {section.title}
             </h3>
-            <ul className="space-y-1">
+            <ul className="space-y-2">
               {section.pages.map((page) => {
                 const isActive = pathname === page.href;
                 return (

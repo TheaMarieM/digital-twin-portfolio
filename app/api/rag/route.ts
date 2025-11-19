@@ -3,6 +3,77 @@ import profile from "@/data/profile.json";
 import { getEmbedding } from "@/lib/embeddings";
 import { topKBySimilarity, EmbeddedChunk } from "@/lib/vector";
 
+// Rate limiting configuration
+const RATE_LIMIT = {
+  maxRequests: 30,
+  windowMs: 60000,
+  maxQueryLength: 300,
+};
+
+// In-memory rate limiting (use Redis for production multi-instance setup)
+const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(identifier: string): { allowed: boolean; remaining: number } {
+  const now = Date.now();
+  const record = rateLimitStore.get(identifier);
+  
+  if (!record || now > record.resetAt) {
+    rateLimitStore.set(identifier, {
+      count: 1,
+      resetAt: now + RATE_LIMIT.windowMs
+    });
+    return { allowed: true, remaining: RATE_LIMIT.maxRequests - 1 };
+  }
+  
+  if (record.count >= RATE_LIMIT.maxRequests) {
+    return { allowed: false, remaining: 0 };
+  }
+  
+  record.count++;
+  return { allowed: true, remaining: RATE_LIMIT.maxRequests - record.count };
+}
+
+// Clean up old rate limit entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetAt) {
+      rateLimitStore.delete(key);
+    }
+  }
+}, 60000);
+
+// Input validation
+function validateQuery(query: unknown): { valid: boolean; error?: string } {
+  if (!query || typeof query !== "string") {
+    return { valid: false, error: "Query must be a non-empty string" };
+  }
+  
+  if (query.length > RATE_LIMIT.maxQueryLength) {
+    return { valid: false, error: `Query exceeds maximum length of ${RATE_LIMIT.maxQueryLength} characters` };
+  }
+  
+  if (query.trim().length < 3) {
+    return { valid: false, error: "Query too short, minimum 3 characters required" };
+  }
+  
+  // Check for injection attempts
+  const suspiciousPatterns = [
+    /<script/gi,
+    /javascript:/gi,
+    /<iframe/gi,
+    /eval\(/gi,
+  ];
+  
+  for (const pattern of suspiciousPatterns) {
+    if (pattern.test(query)) {
+      return { valid: false, error: "Query contains invalid content" };
+    }
+  }
+  
+  return { valid: true };
+}
+
 // Build chunks from STAR data
 const rawChunks = (profile.star_items || []).flatMap((item: any) => {
   const base = { id: item.id, title: item.title };
@@ -27,13 +98,19 @@ type CacheItem = {
 
 const CACHE = {
   items: [] as CacheItem[],
-  capacity: 64,
-  ttlMs: 1000 * 60 * 20,
+  capacity: 100,  // Increased capacity
+  ttlMs: 1000 * 60 * 30,  // 30 minutes TTL
   hits: 0,
   misses: 0,
   requests: 0,
   totalLatencyMs: 0,
 };
+
+// Clean up expired cache entries periodically
+setInterval(() => {
+  const now = Date.now();
+  CACHE.items = CACHE.items.filter(item => now - item.ts <= CACHE.ttlMs);
+}, 60000);
 
 function cosine(a: number[], b: number[]) {
   let dot = 0, na = 0, nb = 0;
@@ -46,7 +123,7 @@ function cosine(a: number[], b: number[]) {
   return dot / denom;
 }
 
-function getFromCache(qEmbed: number[], threshold = 0.93): CacheItem | null {
+function getFromCache(qEmbed: number[], threshold = 0.95): CacheItem | null {
   const now = Date.now();
   let best: { item: CacheItem; sim: number } | null = null;
 
@@ -155,18 +232,44 @@ export async function POST(req: NextRequest) {
   try {
     const start = Date.now();
     
-    // Validate environment variables first
+    // Security: Get client identifier for rate limiting
+    const forwarded = req.headers.get("x-forwarded-for");
+    const ip = forwarded ? forwarded.split(',')[0].trim() : "unknown";
+    
+    // Security: Check rate limit
+    const rateLimit = checkRateLimit(ip);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { 
+          error: "Rate limit exceeded. Please wait before making more requests.",
+          retryAfter: Math.ceil(RATE_LIMIT.windowMs / 1000)
+        },
+        { 
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': RATE_LIMIT.maxRequests.toString(),
+            'X-RateLimit-Remaining': '0',
+            'Retry-After': Math.ceil(RATE_LIMIT.windowMs / 1000).toString()
+          }
+        }
+      );
+    }
+    
+    // Validate environment variables
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
-        { error: "API configuration is incomplete. Please set OPENAI_API_KEY in the environment." },
-        { status: 500 }
+        { error: "API configuration is incomplete. Please contact the administrator." },
+        { status: 503 }
       );
     }
 
-    const { query } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const { query } = body;
 
-    if (!query || typeof query !== "string") {
-      return NextResponse.json({ error: "Missing query" }, { status: 400 });
+    // Security: Validate input
+    const validation = validateQuery(query);
+    if (!validation.valid) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
     let index;
@@ -201,12 +304,24 @@ export async function POST(req: NextRequest) {
       CACHE.requests++;
       CACHE.totalLatencyMs += latencyMs;
 
-      return NextResponse.json({
-        answer: cached.answer,
-        quality: cached.quality,
-        sources: [],
-        meta: { cached: true, latencyMs },
-      });
+      return NextResponse.json(
+        {
+          answer: cached.answer,
+          quality: cached.quality,
+          sources: [],
+          meta: { cached: true, latencyMs },
+        },
+        {
+          headers: {
+            'X-RateLimit-Limit': RATE_LIMIT.maxRequests.toString(),
+            'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+            'X-Content-Type-Options': 'nosniff',
+            'X-Frame-Options': 'DENY',
+            'X-XSS-Protection': '1; mode=block',
+            'X-Cache': 'HIT'
+          }
+        }
+      );
     }
 
     // Vector search
@@ -233,18 +348,30 @@ export async function POST(req: NextRequest) {
     CACHE.requests++;
     CACHE.totalLatencyMs += latencyMs;
 
-    return NextResponse.json({
-      answer,
-      quality,
-      sources: top.map((t, i) => ({
-        id: t.id,
-        title: t.title,
-        section: t.meta?.section,
-        score: Number(t.score.toFixed(3)),
-        index: i + 1,
-      })),
-      meta: { cached: false, latencyMs },
-    });
+    return NextResponse.json(
+      {
+        answer,
+        quality,
+        sources: top.map((t, i) => ({
+          id: t.id,
+          title: t.title,
+          section: t.meta?.section,
+          score: Number(t.score.toFixed(3)),
+          index: i + 1,
+        })),
+        meta: { cached: false, latencyMs },
+      },
+      {
+        headers: {
+          'X-RateLimit-Limit': RATE_LIMIT.maxRequests.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-Content-Type-Options': 'nosniff',
+          'X-Frame-Options': 'DENY',
+          'X-XSS-Protection': '1; mode=block',
+          'Cache-Control': 'private, no-cache, no-store, must-revalidate'
+        }
+      }
+    );
   } catch (e: any) {
     console.error("❌ SERVER ERROR:", e);
     return NextResponse.json({ error: e.message || "Unknown error" }, { status: 500 });

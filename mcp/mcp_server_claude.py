@@ -15,15 +15,15 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 # Import MCP server functionality
 try:
-    from mcp.server.fastmcp import FastMCP
-    from mcp.server.models import InitializationOptions
-    from mcp.types import Tool, TextContent, ImageContent
+    from mcp.server.fastmcp import FastMCP  # type: ignore
+    from mcp.server.models import InitializationOptions  # type: ignore
+    from mcp.types import Tool, TextContent, ImageContent  # type: ignore
 except ImportError:
     # If FastMCP not available, use basic implementation
     print("Note: FastMCP not available, using basic MCP implementation")
-    from mcp.server import Server
-    from mcp.server.models import InitializationOptions
-    from mcp.types import Tool, TextContent
+    from mcp.server import Server  # type: ignore
+    from mcp.server.models import InitializationOptions  # type: ignore
+    from mcp.types import Tool, TextContent  # type: ignore
 
 # Import our tools
 from tools.portfolio_tools import query_portfolio, get_projects, get_skills, search_experience
