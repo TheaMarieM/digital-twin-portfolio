@@ -73,61 +73,64 @@ export default function Home() {
       name: 'Next.js',
       desc: 'React framework • SSR',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11.5172 0C5.15053 0 0 5.15053 0 11.5172C0 17.8839 5.15053 23.0344 11.5172 23.0344C17.8839 23.0344 23.0344 17.8839 23.0344 11.5172C23.0344 5.15053 17.8839 0 11.5172 0Z" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+          <path d="M8 10h8M8 14h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
-      ),
-      badges: ['Framework', 'SSR', 'Full-stack']
+      )
     },
     {
       name: 'Python',
       desc: 'RAG systems • AI integration',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3 11h-2v2h-2v-2H9v-2h2V9h2v2h2v2z" fill="currentColor"/>
         </svg>
-      ),
-      badges: ['Backend', 'AI/ML', 'Automation']
+      )
     },
     {
       name: 'TypeScript',
       desc: 'Type-safe development',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#3178c6">
-          <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0z" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#3178c6" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="3" fill="#3178c6"/>
+          <path d="M6 9h3v6H6zm4 0h3v6h-3zm4 0h3v6h-3z" fill="white"/>
         </svg>
-      ),
-      badges: ['Type Safety', 'JavaScript', 'Development']
+      )
     },
     {
       name: 'Tailwind CSS',
       desc: 'Modern UI design',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#06b6d4">
-          <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#06b6d4" opacity="0.8"/>
+          <circle cx="12" cy="12" r="5" fill="#06b6d4"/>
         </svg>
-      ),
-      badges: ['CSS', 'Responsive', 'Design']
+      )
     },
     {
       name: 'Laravel',
       desc: 'PHP framework • APIs',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#FF2D20">
-          <path d="M23.642 5.43a.364.364 0 01.014.1v5.149c0 .135-.073.26-.189.326l-4.323 2.49v4.934" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#FF2D20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L3 7v10c0 6 9 12 9 12s9-6 9-12V7l-9-5z" fill="#FF2D20" opacity="0.8"/>
+          <path d="M12 8l-4 2v4l4 2 4-2v-4l-4-2z" fill="#FF2D20"/>
         </svg>
-      ),
-      badges: ['PHP', 'MVC', 'Backend']
+      )
     },
     {
       name: 'MySQL',
       desc: 'Database design',
       logo: (
-        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#4479A1">
-          <path d="M5.615 13.944c-.634 0-1.17.085-1.608.255a2.685 2.685 0 00-1.156.765c-.297.34-.445.765-.445 1.276" />
+        <svg className="h-6 w-6" viewBox="0 0 24 24" fill="#4479A1" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" fill="#4479A1" opacity="0.8"/>
+          <g fill="white">
+            <rect x="8" y="6" width="2" height="12" rx="1"/>
+            <rect x="12" y="6" width="2" height="12" rx="1"/>
+            <rect x="16" y="6" width="2" height="12" rx="1"/>
+          </g>
         </svg>
-      ),
-      badges: ['Database', 'SQL', 'Relational']
+      )
     }
   ];
 
